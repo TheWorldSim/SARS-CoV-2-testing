@@ -94,3 +94,5 @@ export interface Chemical extends PartialChemical
 
 
 export const chemicals = add_name<PartialChemical, {[P in keyof typeof _chemicals]: Chemical}>(_chemicals)
+
+// export type ChemicalName = keyof typeof chemicals

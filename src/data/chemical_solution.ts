@@ -118,5 +118,4 @@ export const chemical_solutions = add_name<
   {[P in keyof typeof _chemical_solutions]: ChemicalSolution}
 >(_chemical_solutions)
 
-
-export type ChemicalSolutionName = keyof typeof _chemical_solutions
+// export type ChemicalSolutionName = keyof typeof chemical_solutions

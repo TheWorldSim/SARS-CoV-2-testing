@@ -30,3 +30,8 @@ Other meta reviews:
 
 * Some collection of links and summaries: https://coronavirustechhandbook.com/testing
 * https://www.healthtechnology.wales/wp-content/uploads/2020/04/EAR025-COVID19-diagnostics-report.pdf
+
+## Related resources
+
+* https://www.artel.co/learning_center/impact-of-pipetting-technique/
+* https://slas.org/resources/information/industry-standards/
