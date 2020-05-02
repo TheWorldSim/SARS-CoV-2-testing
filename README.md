@@ -35,3 +35,12 @@ Other meta reviews:
 
 * https://www.artel.co/learning_center/impact-of-pipetting-technique/
 * https://slas.org/resources/information/industry-standards/
+
+# Dev
+
+1. Clone repository.
+2. Run `npm install` in the local copy.
+3. Use one of:
+    * `npm run build` for production build
+    * `npm run dev` for development build (no minification)
+    * `npm run start` for live server on `http://localhost:3030/`
