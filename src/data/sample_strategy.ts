@@ -12,7 +12,7 @@ const _sample_strategies = {
     locations: ["Oropharyngeal (throat)", "Vestibule (nose)"],
     time_needed_minutes: 5, // guess
     clinician_needed: false,
-    references: [REFS.PHE_sampling_2020_04_23],
+    references: [REFS.Public_Health_England_sampling_2020_04_23],
   }),
 }
 

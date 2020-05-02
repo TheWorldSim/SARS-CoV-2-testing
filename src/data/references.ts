@@ -13,6 +13,13 @@ const _REFS = {
       AUTHORS.HoreTA,
     ]
   }),
+  ebay_tube_15ml_falcon: PR({
+    doi: null,
+    url: "https://www.ebay.co.uk/itm/Falcon-352096-15-mL-High-Clarity-Polypropylene-Conical-Tube-17-x-120-mm-Qty-500/183758570793",
+    title: "Falcon 352096 15 mL High-Clarity Polypropylene Conical Tube 17 x 120 mm Qty. 500",
+    other_urls: [],
+    authors: []
+  }),
   GOV_UK_alternative_swab_and_transport_media_2020_04_25: PR({
     doi: null,
     url: "https://www.gov.uk/government/publications/wuhan-novel-coronavirus-guidance-for-clinical-diagnostic-laboratories/covid-19-guidance-for-alternative-swab-types-and-transport-media",
@@ -32,7 +39,7 @@ const _REFS = {
       AUTHORS.JurkowskiTP,
     ],
   }),
-  PHE_sampling_2020_04_23: PR({
+  Public_Health_England_sampling_2020_04_23: PR({
     doi: null,
     url: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/880999/Combined_throat_nose_swab_instruction_sheet_postal.pdf",
     title: "How to take a combined throat and nose swab | Postal version",

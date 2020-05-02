@@ -10,6 +10,12 @@ const _sample_transport_media = {
     sars_cov2_inactivation_log10_reduction: null,
     sars_cov2_inactivation_refs: [],
   }),
+  Dry: PSTM({
+    chemical_solution: null,
+    sars_cov2_desired_inactivation: false,
+    sars_cov2_inactivation_log10_reduction: null,
+    sars_cov2_inactivation_refs: [],
+  }),
   lysis_GITC_4M_TritonX100_3: PSTM({
     chemical_solution: chemical_solutions.GITC_4M_TritonX100_3,
     sars_cov2_desired_inactivation: true,
@@ -65,7 +71,7 @@ function PSTM (pstm: PartialSampleTransportMedia): PartialSampleTransportMedia {
 
 interface PartialSampleTransportMedia
 {
-  chemical_solution: ChemicalSolution//Name
+  chemical_solution: ChemicalSolution
   sars_cov2_desired_inactivation: boolean
   sars_cov2_inactivation_log10_reduction: number
   sars_cov2_inactivation_refs: Reference[]
