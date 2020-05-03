@@ -8,6 +8,7 @@ import { SampleTransportMedia, sample_transport_media } from "./sample_transport
 
 const _sample_protocols = {
   Public_Health_England_sampling_2020_04_23: PSP({
+    display_name: "PHE (UK) 2020-04-23",
     refs: [
       REFS.Public_Health_England_sampling_2020_04_23
     ],

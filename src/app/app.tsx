@@ -35,7 +35,7 @@ export class App extends Component<AppProps, AppState> {
 
   render(props: AppProps, state: AppState) {
 
-    return <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 3fr" }}>
       <SampleProtocolList />
       <TransportList />
       <DetectionProtocol />

@@ -31,7 +31,7 @@ export interface LysisMedia extends PartialLysisMedia
   display_name: string
 }
 
-export const lysis_media = add_name<
+export const lysis_medias = add_name<
   PartialLysisMedia,
   {[P in keyof typeof _lysis_media]: LysisMedia}
 >(_lysis_media)
