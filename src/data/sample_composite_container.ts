@@ -1,6 +1,6 @@
 import { add_name } from "../util/add_name"
 import { SampleContainer, sample_containers } from "./sample_container"
-import { iter_key_values } from "../util/iter_key_values"
+import { iter_key_values } from "../util/dictionary_iter_key_values"
 
 
 const _sample_composite_containers = {
@@ -18,6 +18,7 @@ function PSCC (pscc: PartialSampleCompositeContainer) { return pscc }
 
 interface PartialSampleCompositeContainer
 {
+  display_name?: string
   containers: SampleContainer[]
 }
 
@@ -25,6 +26,7 @@ export interface SampleCompositeContainer extends PartialSampleCompositeContaine
 {
   cost_GBP: () => number
   name: string
+  display_name: string
 }
 
 

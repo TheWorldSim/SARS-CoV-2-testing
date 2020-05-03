@@ -41,6 +41,7 @@ function PSP (psp: PartialSampleProtocol): PartialSampleProtocol { return psp }
 
 interface PartialSampleProtocol
 {
+  display_name?: string
   refs: Reference[]
   sample_strategy: SampleStrategy
   sample_container: SampleCompositeContainer
@@ -56,6 +57,7 @@ interface PartialSampleProtocol
 export interface SampleProtocol extends PartialSampleProtocol
 {
   name: string
+  display_name: string
 }
 
 

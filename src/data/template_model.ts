@@ -13,12 +13,14 @@ function PT (pt: PartialTemplate): PartialTemplate { return pt }
 
 interface PartialTemplate
 {
+  display_name?: string
   other_names: string[]
 }
 
 export interface Template extends PartialTemplate
 {
   name: string
+  display_name: string
 }
 
 

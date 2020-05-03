@@ -32,6 +32,7 @@ function PSCT (psct: PartialSampleCollectorTool): PartialSampleCollectorTool { r
 
 interface PartialSampleCollectorTool
 {
+  display_name?: string
   cost_GBP: number
   cost_GBP_refs: Reference[]
   length_cm: number
@@ -44,6 +45,7 @@ interface PartialSampleCollectorTool
 export interface SampleCollectorTool extends PartialSampleCollectorTool
 {
   name: string
+  display_name: string
 }
 
 

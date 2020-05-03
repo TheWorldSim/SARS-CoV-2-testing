@@ -1,5 +1,5 @@
 
-export function add_name <P, R> (input: {[index: string]: P}): R {
+export function add_name <P extends { display_name?: string; }, R> (input: {[index: string]: P}): R {
   return Object.keys(input)
     .reduce((all, name) => {
 
@@ -8,6 +8,7 @@ export function add_name <P, R> (input: {[index: string]: P}): R {
       const full: P & { name: string; } = {
         ...partial,
         name: name,
+        display_name: partial.display_name || name.replace(/_/g, " ")
       }
 
       all[name] = full

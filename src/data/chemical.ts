@@ -80,6 +80,7 @@ function PC (pc: PartialChemical): PartialChemical { return pc }
 
 interface PartialChemical
 {
+  display_name?: string
   other_names: string[]
   cost_GBP: number  // £
   cost_per: "gram" | "ml" // if in solution then convert to gram
@@ -89,6 +90,7 @@ interface PartialChemical
 export interface Chemical extends PartialChemical
 {
   name: string
+  display_name: string
 }
 
 

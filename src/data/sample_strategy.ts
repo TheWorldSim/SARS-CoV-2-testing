@@ -33,6 +33,7 @@ const is_mid_turbinate = (sl: SampleLocation) => sl === "Mid turbinate (nose)"
 
 interface PartialSampleStrategy
 {
+  display_name?: string
   locations: SampleLocation[]
   time_needed_minutes: number
   clinician_needed: boolean
@@ -41,6 +42,7 @@ interface PartialSampleStrategy
 export interface SampleStrategy extends PartialSampleStrategy
 {
   name: string
+  display_name: string
   required_sample_collector_length_cm: number | null
 }
 

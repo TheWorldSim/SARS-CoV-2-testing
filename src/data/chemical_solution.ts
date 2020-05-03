@@ -13,6 +13,7 @@ const _chemical_solutions = {
     ],
   }),
   GITC_4M_TritonX100_3: PCS({
+    display_name: "GITC 4M Triton X-100 3%",
     other_names: [],
     chemical_parts: [
       { chemical: chemicals.GITC, amount: { g: 472.75 } },  // 472.75 g directly from paper
@@ -27,6 +28,7 @@ const _chemical_solutions = {
     ],
   }),
   GITC_6M: PCS({
+    display_name: "GITC 6M - Oberacker 2020",
     other_names: [],
     chemical_parts: [
       { chemical: chemicals.GITC, amount: { g: 35.46 } },
@@ -96,6 +98,7 @@ function PCS (pcs: PartialChemicalSolution): PartialChemicalSolution { return pc
 
 interface PartialChemicalSolution
 {
+  display_name?: string
   other_names: string[]
   chemical_parts: ChemicalSolutionPart[]
   final_volume_ml: number
@@ -104,6 +107,7 @@ interface PartialChemicalSolution
 export interface ChemicalSolution extends PartialChemicalSolution
 {
   name: string
+  display_name: string
 }
 
 interface ChemicalSolutionPart

@@ -1,41 +1,75 @@
 
 
+// TODO can we plug into some online portal to get these author details / IDs instead?
+
 export const AUTHORS = {
-  DrakeK: A({
+  DempseyC: AI({
+    first_name: "Catherine",
+    last_name: "Dempsey",
+    middle_initials: "",
+  }),
+  DrakeK: AI({
     first_name: "Kylie",
     last_name: "Drake",
     middle_initials: "",
   }),
-  HoreTA: A({
+  HoreTA: AI({
     first_name: "Tim",
     last_name: "Hore",
     middle_initials: "A",
   }),
-  JurkowskiTP: A({
+  JurkowskiTP: AI({
     first_name: "Tomasz",
     last_name: "Jurkowski",
     middle_initials: "P",
   }),
-  OberackerP: A({
+  OberackerP: AI({
     first_name: "Phil",
     last_name: "Oberacker",
     middle_initials: "",
   }),
-  PHE: A({
-    organisation: "PHE"
+  ScallanMF: AI({
+    first_name: "Martina",
+    last_name: "Scallan",
+    middle_initials: "F",
   }),
-  GOV_UK: A({
+
+  // Organisations
+  GOV_UK: AO({
     organisation: "GOV UK"
+  }),
+  PHE: AO({
+    organisation: "PHE"
   }),
 }
 
 
-function A (a: Author): Author { return a }
+function AI (ai: AuthorIndividual): Author {
+  return {
+    ...ai,
+    display_name: `${ai.last_name} ${ai.first_name[0]}${ai.middle_initials}`
+  }
+}
 
-export type Author = {
+function AO (ao: AuthorOrganisation): Author {
+  return {
+    ...ao,
+    display_name: ao.organisation
+  }
+}
+
+interface AuthorIndividual
+{
   first_name: string
   last_name: string
   middle_initials: string
-} | {
+}
+
+interface AuthorOrganisation
+{
   organisation: string
 }
+
+export type Author = {
+  display_name: string
+} & (AuthorIndividual | AuthorOrganisation)

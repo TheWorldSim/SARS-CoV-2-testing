@@ -11,21 +11,24 @@ const _REFS = {
     authors: [
       AUTHORS.DrakeK,
       AUTHORS.HoreTA,
-    ]
+    ],
+    published_date: new Date("2020-04-01"),
   }),
   ebay_tube_15ml_falcon: PR({
     doi: null,
     url: "https://www.ebay.co.uk/itm/Falcon-352096-15-mL-High-Clarity-Polypropylene-Conical-Tube-17-x-120-mm-Qty-500/183758570793",
     title: "Falcon 352096 15 mL High-Clarity Polypropylene Conical Tube 17 x 120 mm Qty. 500",
     other_urls: [],
-    authors: []
+    authors: [],
+    published_date: null,
   }),
   GOV_UK_alternative_swab_and_transport_media_2020_04_25: PR({
     doi: null,
     url: "https://www.gov.uk/government/publications/wuhan-novel-coronavirus-guidance-for-clinical-diagnostic-laboratories/covid-19-guidance-for-alternative-swab-types-and-transport-media",
     title: "COVID-19: guidance on alternative swab types and transport media",
     other_urls: [],
-    authors: [AUTHORS.GOV_UK]
+    authors: [AUTHORS.GOV_UK],
+    published_date: null,
   }),
   Oberacker_etal_2019_BOMB: PR({
     doi: "10.1371/journal.pbio.3000107",
@@ -38,6 +41,7 @@ const _REFS = {
       AUTHORS.HoreTA,
       AUTHORS.JurkowskiTP,
     ],
+    published_date: new Date("2019-01-10"),
   }),
   Public_Health_England_sampling_2020_04_23: PR({
     doi: null,
@@ -47,6 +51,7 @@ const _REFS = {
       "https://www.gov.uk/government/publications/covid-19-guidance-for-taking-swab-samples",
     ],
     authors: [AUTHORS.PHE],
+    published_date: null,
   }),
   Scallan_etal_2020: PR({
     doi: null,
@@ -55,7 +60,12 @@ const _REFS = {
     other_urls: [
       "https://testingmethods.crowdicity.com/post/3162870",
     ],
-    authors: [AUTHORS.PHE],
+    authors: [
+      AUTHORS.ScallanMF,
+      AUTHORS.DempseyC,
+      // TODO add others
+    ],
+    published_date: new Date("2020-04-05"),
   }),
   SigmaAldrich_Antifoam204: PR({
     doi: null,
@@ -63,6 +73,7 @@ const _REFS = {
     title: "Antifoam 204",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_Bromophenol_blue: PR({
     doi: null,
@@ -70,6 +81,7 @@ const _REFS = {
     title: "Bromophenol blue",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_EDTA: PR({
     doi: null,
@@ -77,6 +89,7 @@ const _REFS = {
     title: "Ethylenediaminetetraacetic acid disodium salt dihydrate",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_GITC: PR({
     doi: null,
@@ -84,6 +97,7 @@ const _REFS = {
     title: "Guanidine thiocyanate solution",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_NaCl: PR({
     doi: null,
@@ -91,6 +105,7 @@ const _REFS = {
     title: "Sodium chloride",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_Sarkosyl: PR({
     doi: null,
@@ -98,6 +113,7 @@ const _REFS = {
     title: "N-Lauroylsarcosine sodium salt",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_TrisHCl: PR({
     doi: null,
@@ -105,6 +121,7 @@ const _REFS = {
     title: "Tris hydrochloride",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
   SigmaAldrich_TritonX_100: PR({
     doi: null,
@@ -112,6 +129,7 @@ const _REFS = {
     title: "Triton™ X-100",
     other_urls: [],
     authors: [],
+    published_date: null,
   }),
 }
 
@@ -119,14 +137,17 @@ const _REFS = {
 function PR (pr: PartialReference): PartialReference { return pr }
 
 interface PartialReference {
+  display_name?: string
   doi: string | null
   url: string | null
   title: string
   other_urls: string[]
   authors: Author[]
+  published_date: Date
 }
 export interface Reference extends PartialReference {
   name: string
+  display_name: string
 }
 
 

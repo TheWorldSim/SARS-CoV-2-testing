@@ -1,5 +1,10 @@
 import { Component, h } from "preact"
-import { Lysis } from "./components/lysis/Lysis"
+import { SampleProtocolList } from "./components/sample_protocol/SampleProtocolList"
+import { TransportList } from "./components/transport/TransportList"
+import { DetectionProtocol } from "./components/detection_protocol/DetectionProtocol"
+import { LysisList } from "./components/lysis/LysisList"
+import { RNAPurificationList } from "./components/RNA_purification/RNAPurificationList"
+import { RNAAmplificationList } from "./components/RNA_amplification/RNAAmplificationList"
 
 export interface AppProps {
   title: string
@@ -29,15 +34,11 @@ export class App extends Component<AppProps, AppState> {
   }
 
   render(props: AppProps, state: AppState) {
-    return <div>
-      <h1>{props.title}</h1>
-      <p>
-        {state.title}
-      </p>
-      <Lysis />
-      <p>
-        Initial idea - <a href="https://dominicstpierre.com/how-to-start-with-typescript-and-preact-a9ea3e0ba4dc">Dominic St-Pierre [Medium]</a>. Thanks alot!
-      </p>
+
+    return <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr" }}>
+      <SampleProtocolList />
+      <TransportList />
+      <DetectionProtocol />
     </div>
   }
 }

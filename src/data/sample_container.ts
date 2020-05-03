@@ -50,6 +50,7 @@ function PSC (psc: PartialSampleContainer): PartialSampleContainer { return psc 
 
 type PartialSampleContainer =
 {
+  display_name?: string
   cost_GBP: number
   cost_GBP_refs: Reference[]
   material: "High-Clarity Polypropylene" | "Plastic" | "Cardboard"
@@ -61,6 +62,7 @@ type PartialSampleContainer =
 export interface SampleContainer extends PartialSampleContainer
 {
   name: string
+  display_name: string
 }
 
 

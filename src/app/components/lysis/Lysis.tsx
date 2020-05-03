@@ -1,16 +1,26 @@
 import { h } from "preact"
-import { useState } from "preact/hooks"
-import { chemical_solutions } from "../../../data/chemical_solution"
+import { LysisMedia } from "../../../data/lysis_media"
+import { RefLink } from "../../../util/ref_link"
 
-function Lysis()
+
+function as_date (d: Date)
 {
-  const [value, setValue] = useState(0)
+  const month = d.getUTCMonth() + 1
+  return `${d.getUTCFullYear()}-${month < 10 ? "0" : ""}${month}`
+}
+
+
+function Lysis(props: { lysis_media: LysisMedia })
+{
+  const { lysis_media } = props
+  const ref1 = lysis_media.chemical_solution.refs[0]
+  const authr = ref1.authors[0]
 
   return (
-    <div>
-      <div>Lysis: {value} {chemical_solutions.GITC_6M.name}</div>
-      <button onClick={() => setValue(value + 1)}>Increment</button>
-      <button onClick={() => setValue(value - 1)}>Decrement</button>
+    <div className="component_container">
+      <b>{lysis_media.chemical_solution.display_name}</b>
+      <br /><RefLink reference={ref1}>{authr.display_name} et al. {as_date(ref1.published_date)}</RefLink>
+      <br />{lysis_media.sars_cov2_inactivation_log10_reduction}
     </div>
   )
 }
