@@ -19,9 +19,12 @@ export function Header (props: Props)
     backgroundColor: "white",
   }
 
-  return <div style={style}>
-    <Link route={Route.home} current_route={props.location} change_route={props.change_route}>Home</Link>&nbsp;&nbsp;
-    <Link route={Route.dashboard} current_route={props.location} change_route={props.change_route}>Dashboard</Link>
-    <h1 style={{ textAlign: "center" }}>Scalable SARS-CoV-2 Testing Strategies</h1>
+  return <div>
+    <div style={style}>
+      <Link route={Route.home} current_route={props.location} change_route={props.change_route}>Home</Link>&nbsp;&nbsp;
+      <Link route={Route.dashboard} current_route={props.location} change_route={props.change_route}>Dashboard</Link>
+      <h1 style={{ textAlign: "center" }}>Scalable SARS-CoV-2 Testing Strategies</h1>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /> {/* Someone please save us from the <br />! */}
   </div>
 }

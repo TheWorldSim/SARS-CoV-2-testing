@@ -4,63 +4,60 @@ import { Link, Route, ChangeRoute, LinkUnstyled } from "../../Routes"
 
 export function Intro (props: { change_route: ChangeRoute })
 {
-  return <div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /> {/* Someone please save us from the <br />! */}
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr 1fr" }}>
-      <div></div>
-      <div>
-        <p>
-          <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>Go to dashboard</Link>
-        </p>
-        <p>
-          The future needs large scale testing.  This will need coordinated and mass manufacturing at a scale not seen in recent times.
-        </p>
-        <p>
-          We've had to harness the industrial might of the world many times before.  In 1941 it was the open sharing of information to standardise industry including the <a href="https://www.westyorkssteel.com/blog/bs970-an-act-of-perseverance/">"EN" grades of steel</a>.  Remmeber "EN" stood for Emergency Number!
-        </p>
-        <p>
-          And we did it again during the development of the internet.  Private industry collaborating around open designs, information and a common set of interoperable standards.
-          <ul>
-            <li>The goal is to get more, and accurate testing globally.</li>
-            <li>The scale and extended time periods required means this also needs to be affordable.</li>
-          </ul>
-          Even though this project is called CoronaOpenSource, the project still welcomes existing and new closed source implmentations for testing that are effective in increasing the global rate of affordable testing.
-        </p>
-        <h3>The dashboard</h3>
-        <p>
-          <LinkUnstyled route={Route.dashboard} change_route={props.change_route}>The dashboard</LinkUnstyled> will help anyone understand the options and their tradeoffs:
-          <ul>
-            <li>what technologies / protocols are available</li>
-            <li>which ones have been clinical validated end-to-end: from patient to result.</li>
-            <li>what they cost</li>
-            <li>to achieve a level of testing, what's the total level of resources needed? (chemicals, plastics, robotics, facilities)</li>
-            <li>which companies, government facilities or NGOs might provide these resources</li>
-          </ul>
-        </p>
-        <p>
-          <h4>Standards</h4>
-          After a conversation with Daniel Goodwin and Joi Ito, it's clear that interoperability is key for large scale testing.  For example we have standards for:
-          <ul>
-            <li><a href="https://slas.org/SLAS/assets/File/ANSI_SLAS_4-2004_WellPositions.pdf">96 well plates from ANSI/SBS/SLAS</a></li>
-            <li><a href="https://www.google.com/search?q=iso+8655&oq=iso+8655">pipette accuracy etc</a></li>
-          </ul>
-          But we don't have standards for:
-          <ul>
-            <li><a href="https://medium.com/@danielrgoodwin/architecting-the-biocensus-9da1d3399359">sample collection tubes</a></li>
-            <li>transport media (chemical buffer / solutions)</li>
-            <li>lysis media (chemical buffer / solutions)</li>
-            <li>pipette tips; dimensions, wetability, filtration standards, recycling etc</li>
-            <li>inter region data exchange</li>
-          </ul>
-          This is a call to action and <a href="https://github.com/coronaopensource">a place to organise and agree upon those standards</a>.
-        </p>
-        <br />
-        <p>
-          The <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>interative version</Link> is based off of the <a href="https://docs.google.com/spreadsheets/d/1vgjfj3HQX269kGi21wtF6sfsjLfuOe-NWLp2GT7XMjE/edit#gid=0">Scalable SARS-CoV-2 Testing Strategies spreadsheet</a>.  <a href="https://github.com/TheWorldSim/SARS-CoV-2-testing">Code</a>.
-        </p>
-        <br /><br /><br />
-      </div>
-      <div></div>
+  return <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr 1fr" }}>
+    <div></div>
+    <div>
+      <p>
+        <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>Go to dashboard</Link>
+      </p>
+      <p>
+        The future needs large scale testing.  This will need coordinated and mass manufacturing at a scale not seen in recent times.
+      </p>
+      <p>
+        We've had to harness the industrial might of the world many times before.  In 1941 it was the open sharing of information to standardise industry including the <a href="https://www.westyorkssteel.com/blog/bs970-an-act-of-perseverance/">"EN" grades of steel</a>.  Remmeber "EN" stood for Emergency Number!
+      </p>
+      <p>
+        And we did it again during the development of the internet.  Private industry collaborating around open designs, information and a common set of interoperable standards.
+        <ul>
+          <li>The goal is to get more, and accurate testing globally.</li>
+          <li>The scale and extended time periods required means this also needs to be affordable.</li>
+        </ul>
+        Even though this project is called CoronaOpenSource, the project still welcomes existing and new closed source implmentations for testing that are effective in increasing the global rate of affordable testing.
+      </p>
+      <h3>The dashboard</h3>
+      <p>
+        <LinkUnstyled route={Route.dashboard} change_route={props.change_route}>The dashboard</LinkUnstyled> will help anyone understand the options and their tradeoffs:
+        <ul>
+          <li>what technologies / protocols are available</li>
+          <li>which ones have been clinical validated end-to-end: from patient to result.</li>
+          <li>what they cost</li>
+          <li>to achieve a level of testing, what's the total level of resources needed? (chemicals, plastics, robotics, facilities)</li>
+          <li>which companies, government facilities or NGOs might provide these resources</li>
+        </ul>
+      </p>
+      <p>
+        <h4>Standards</h4>
+        After a conversation with Daniel Goodwin and Joi Ito, it's clear that interoperability is key for large scale testing.  For example we have standards for:
+        <ul>
+          <li><a href="https://slas.org/SLAS/assets/File/ANSI_SLAS_4-2004_WellPositions.pdf">96 well plates from ANSI/SBS/SLAS</a></li>
+          <li><a href="https://www.google.com/search?q=iso+8655&oq=iso+8655">pipette accuracy etc</a></li>
+        </ul>
+        But we don't have standards for:
+        <ul>
+          <li><a href="https://medium.com/@danielrgoodwin/architecting-the-biocensus-9da1d3399359">sample collection tubes</a></li>
+          <li>transport media (chemical buffer / solutions)</li>
+          <li>lysis media (chemical buffer / solutions)</li>
+          <li>pipette tips; dimensions, wetability, filtration standards, recycling etc</li>
+          <li>inter region data exchange</li>
+        </ul>
+        This is a call to action and <a href="https://github.com/coronaopensource">a place to organise and agree upon those standards</a>.
+      </p>
+      <br />
+      <p>
+        The <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>interative version</Link> is based off of the <a href="https://docs.google.com/spreadsheets/d/1vgjfj3HQX269kGi21wtF6sfsjLfuOe-NWLp2GT7XMjE/edit#gid=0">Scalable SARS-CoV-2 Testing Strategies spreadsheet</a>.  <a href="https://github.com/TheWorldSim/SARS-CoV-2-testing">Code</a>.
+      </p>
+      <br /><br /><br />
     </div>
+    <div></div>
   </div>
 }
