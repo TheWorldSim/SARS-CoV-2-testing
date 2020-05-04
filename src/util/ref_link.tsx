@@ -1,4 +1,4 @@
-import { h, VNode } from "preact"
+import { h, ComponentChildren } from "preact"
 import { Reference } from "../data/references"
 
 
@@ -8,7 +8,7 @@ function ref_link (ref: Reference)
 }
 
 
-export function RefLink (props: { reference: Reference, children: (string | VNode)[] })
+export function RefLink (props: { reference: Reference, children: ComponentChildren })
 {
   const { reference, children } = props
 
