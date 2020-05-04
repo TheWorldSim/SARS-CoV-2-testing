@@ -1,4 +1,5 @@
 import { Reference, REFS } from "./references"
+import { calculate_display_name } from "../util/add_name"
 
 
 const _sample_strategies = {
@@ -61,6 +62,7 @@ export const sample_strategies = Object.keys(_sample_strategies)
 
     const sample_strategy: SampleStrategy = {
       ...partial_sample_strategy,
+      display_name: calculate_display_name(sample_strategy_name, partial_sample_strategy.display_name),
       name: sample_strategy_name,
       required_sample_collector_length_cm,
     }
