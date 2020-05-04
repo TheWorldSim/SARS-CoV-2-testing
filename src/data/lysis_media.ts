@@ -20,6 +20,7 @@ const _lysis_media = {
     sars_cov2_inactivation_refs: [],
   }),
   lysis_Cells_to_cDNAII_Cell_Lysis_Buffer_thermofisher: PLM({
+    display_name: "Cells to cDNA II Cell Lysis Buffer - Thermofisher",
     chemical_solution: null,
     sars_cov2_inactivation_log10_reduction: null,
     sars_cov2_inactivation_refs: [],
