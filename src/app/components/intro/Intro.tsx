@@ -11,13 +11,13 @@ export function Intro (props: { change_route: ChangeRoute })
         <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>Go to dashboard</Link>
       </p>
       <p>
-        The future needs large scale testing.  This will need coordinated and mass manufacturing at a scale not seen in recent times.
+        The future needs large scale testing.  This will need rapid, coordinated mass manufacturing.
       </p>
       <p>
-        We've had to harness the industrial might of the world many times before.  In 1941 it was the open sharing of information to standardise industry including the <a href="https://www.westyorkssteel.com/blog/bs970-an-act-of-perseverance/">"EN" grades of steel</a>.  Remmeber "EN" stood for Emergency Number!
+        We've had to harness and coordinate the industrial might of the world many times before.  In 1941 it was the open sharing of information to standardise industry including the <a href="https://www.westyorkssteel.com/blog/bs970-an-act-of-perseverance/">"EN" grades of steel</a>.  Remmeber "EN" stood for Emergency Number!
       </p>
       <p>
-        And we did it again during the development of the internet.  Private industry collaborating around open designs, information and a common set of interoperable standards.
+        And the world did it again during the development of the internet.  Private industry collaborating around open designs, information and a common set of interoperable standards.
         <ul>
           <li>The goal is to get more, and accurate testing globally.</li>
           <li>The scale and extended time periods required means this also needs to be affordable.</li>
@@ -31,7 +31,7 @@ export function Intro (props: { change_route: ChangeRoute })
           <li>what technologies / protocols are available</li>
           <li>which ones have been clinical validated end-to-end: from patient to result.</li>
           <li>what they cost</li>
-          <li>to achieve a level of testing, what's the total level of resources needed? (chemicals, plastics, robotics, facilities)</li>
+          <li>to achieve a level of testing, what's the total level of resources needed? (swabs, chemicals, plastics, robotics, facilities)</li>
           <li>which companies, government facilities or NGOs might provide these resources</li>
         </ul>
       </p>
