@@ -35,11 +35,17 @@ export const AUTHORS = {
   }),
 
   // Organisations
+  CrickInstitute: AO({
+    organisation: "Crick Institute",
+  }),
   GOV_UK: AO({
-    organisation: "GOV UK"
+    organisation: "GOV UK",
+  }),
+  OpenCell: AO({
+    organisation: "OpenCell",
   }),
   PHE: AO({
-    organisation: "PHE"
+    organisation: "PHE",
   }),
 }
 

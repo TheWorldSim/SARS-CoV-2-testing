@@ -3,6 +3,39 @@ import { add_name } from "../util/add_name"
 
 
 const _REFS = {
+  BombBio_OpenCell_V1: PR({
+    doi: null,
+    url: "https://www.opencell.bio/covid-19-testing-laboratories",
+    title: "OpenCell: Covid-19 Testing Laboratories in Shipping Containers",
+    other_urls: [],
+    authors: [
+      AUTHORS.OpenCell,
+    ],
+    published_date: new Date("2020-05-01"),
+  }),
+  Crick_V1_RNA_amplification_protocol: PR({
+    doi: null,
+    url: "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%207%20RTPCR%20using%20BGI%20kit.pdf",
+    title: "Supplementary Method 7 RT-PCR for SARS-CoV-2 using the BGI kit",
+    other_urls: [
+      "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%205%20Manual%20preparation%20of%20RTPCR%20master%20mix%20plate.pdf",
+      "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%206%20Automated%20RNA%20transfer%20to%20RT_PCR%20master%20mix%20plate.pdf",
+    ],
+    authors: [
+      AUTHORS.CrickInstitute,
+    ],
+    published_date: new Date("2020-04-09"),
+  }),
+  Crick_V1_RNA_purification_protocol: PR({
+    doi: null,
+    url: "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%204%20Automated%20RNA%20extraction%20using%20Biomek%20FX.pdf",
+    title: "Supplementary Method 4 Automated RNA extraction using Biomek FX",
+    other_urls: [],
+    authors: [
+      AUTHORS.CrickInstitute,
+    ],
+    published_date: new Date("2020-04-09"),
+  }),
   Drake_etal_2020_SARS_CoV_2_BOMB_VTM: PR({
     doi: null,
     url: "https://bomb.bio/wp-content/uploads/2020/04/SARS-CoV-2-RNA-purification-from-nasal-swabs_BOMBv2.pdf",
@@ -42,6 +75,16 @@ const _REFS = {
       AUTHORS.JurkowskiTP,
     ],
     published_date: new Date("2019-01-10"),
+  }),
+  OpenCell_RNA_amplification_protocol: PR({
+    doi: null,
+    url: "https://www.opencell.bio/covid-19-testing-laboratories",
+    title: "OpenCell: Covid-19 Testing Laboratories in Shipping Containers",
+    other_urls: [],
+    authors: [
+      AUTHORS.OpenCell,
+    ],
+    published_date: new Date("2020-05-01"),
   }),
   Public_Health_England_sampling_2020_04_23: PR({
     doi: null,

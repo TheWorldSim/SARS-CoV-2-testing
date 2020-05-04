@@ -2,28 +2,31 @@ import { Reference, REFS } from "./references"
 import { add_name } from "../util/add_name"
 
 
-const _templates = {
+const _temmplates = {
   ExampleItem: PT({
     other_names: [],
   }),
 }
 
 
-function PT (pt: PartialTemplate): PartialTemplate { return pt }
+function PT (pt: PartialTemmplate): PartialTemmplate { return pt }
 
-interface PartialTemplate
+interface PartialTemmplate
 {
   display_name?: string
   other_names: string[]
 }
 
-export interface Template extends PartialTemplate
+export interface Teemplate extends PartialTemmplate
 {
   name: string
   display_name: string
 }
 
 
-export const templates = add_name<PartialTemplate, {[P in keyof typeof _templates]: Template}>(_templates)
+export const temmplates = add_name<
+  PartialTemmplate,
+  {[P in keyof typeof _temmplates]: Teemplate}
+>(_temmplates)
 
-// export type TemplateName = keyof typeof templates
+// export type TemmplateName = keyof typeof temmplates
