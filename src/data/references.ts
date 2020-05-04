@@ -13,6 +13,16 @@ const _REFS = {
     ],
     published_date: new Date("2020-05-01"),
   }),
+  Crick_V1_method_11_lysis_buffer: PR({
+    doi: null,
+    url: "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%2011%20Preparation%20of%20L6%20Guanidinium%20thiocyanate%20virus%20Inactivation%20Buffer.pdf",
+    title: "Supplementary Method 11 - Preparation of 5M L6 guanidinium thiocyanate virus inactivation buffer",
+    other_urls: [],
+    authors: [
+      AUTHORS.CrickInstitute,
+    ],
+    published_date: new Date("2020-04-09"),
+  }),
   Crick_V1_RNA_amplification_protocol: PR({
     doi: null,
     url: "https://www.crick.ac.uk/sites/default/files/2020-04/Supplementary%20Method%207%20RTPCR%20using%20BGI%20kit.pdf",

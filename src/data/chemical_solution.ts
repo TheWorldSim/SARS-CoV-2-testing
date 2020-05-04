@@ -12,8 +12,8 @@ const _chemical_solutions = {
       REFS.GOV_UK_alternative_swab_and_transport_media_2020_04_25,
     ],
   }),
-  GITC_4M_TritonX100_3: PCS({
-    display_name: "GITC 4M Triton X-100 3%",
+  GITC_4M_TritonX100_3__Scallan: PCS({
+    display_name: "GITC 4 M Triton X-100 3%",
     other_names: [],
     chemical_parts: [
       { chemical: chemicals.GITC, amount: { g: 472.75 } },  // 472.75 g directly from paper
@@ -27,8 +27,22 @@ const _chemical_solutions = {
       REFS.Scallan_etal_2020,
     ],
   }),
-  GITC_6M: PCS({
-    display_name: "GITC 6M - Oberacker 2020",
+  GITC_5M_TritonX100_1_3__Crick: PCS({
+    display_name: "GITC 5 M Triton X-100 1.3%",
+    other_names: [],
+    chemical_parts: [
+      { chemical: chemicals.GITC, amount: { g: 600 } },
+      { chemical: chemicals.Tris_HCl_ph_8, amount: { g: 6.06 } },  // (0.5 litres * 0.1 M) * (121.14 g / mol)
+      { chemical: chemicals.EDTA, amount: { g: 8.19 } },  // 0.11 lites * 0.2 M * 372.24
+      { chemical: chemicals.TritonX_100, amount: { ml: 13 } },
+    ],
+    final_volume_ml: 1000,
+    refs: [
+      REFS.Crick_V1_method_11_lysis_buffer,
+    ],
+  }),
+  GITC_6M__Oberacker: PCS({
+    display_name: "GITC 6 M - Oberacker 2020",
     other_names: [],
     chemical_parts: [
       { chemical: chemicals.GITC, amount: { g: 35.46 } },

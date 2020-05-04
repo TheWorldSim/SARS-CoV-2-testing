@@ -2,6 +2,16 @@ import { Reference, REFS } from "./references"
 import { add_name } from "../util/add_name"
 
 
+const Tris_HCl = PC({
+  other_names: [],
+  molecular_mass__gram_per_mol: 121.14,
+  cost_GBP: 0.23,  // 115 £ / 500 g
+  cost_per: "gram",
+  cost_refs: [
+    REFS.SigmaAldrich_TrisHCl,
+  ],
+})
+
 const _chemicals = {
   Antifoam_204_Merck_A8311_50ml: PC({
     other_names: [],
@@ -66,15 +76,14 @@ const _chemicals = {
       REFS.SigmaAldrich_Sarkosyl,
     ],
   }),
-  Tris_HCl_ph_7p6_8: PC({
-    other_names: [],
-    molecular_mass__gram_per_mol: 121.14,
-    cost_GBP: 0.23,  // 115 £ / 500 g
-    cost_per: "gram",
-    cost_refs: [
-      REFS.SigmaAldrich_TrisHCl,
-    ],
-  }),
+  Tris_HCl_ph_7p6_8: {
+    ...Tris_HCl,
+    comment: "pH 7.6 to 8 (correct?)",
+  },
+  Tris_HCl_ph_8: {
+    ...Tris_HCl,
+    comment: "pH 8",
+  },
   TritonX_100: PC({
     other_names: [
       "Triton X-100",
@@ -96,6 +105,7 @@ interface PartialChemical
 {
   display_name?: string
   other_names: string[]
+  comment?: string
   molecular_mass__gram_per_mol: number
   cost_GBP: number  // £
   cost_per: "gram" | "ml" // if in solution then convert to gram

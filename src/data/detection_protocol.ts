@@ -9,14 +9,14 @@ const _detection_protocols = {
   Crick_V1: PT({
     display_name: "Crick v1",
     other_names: [],
-    lysis_media: lysis_medias.lysis_GITC_6M,
+    lysis_media: lysis_medias.lysis_GITC_5M_TritonX100_1_3__Crick,
     RNA_purification: RNA_purification_protocols.Crick_V1,
     RNA_amplification: RNA_amplification_protocols.Crick_V1,
   }),
   OpenCell_V1: PT({
     display_name: "OpenCell v1",
     other_names: [],
-    lysis_media: lysis_medias.lysis_GITC_6M,
+    lysis_media: lysis_medias.lysis_GITC_6M__Oberacker,
     RNA_purification: RNA_purification_protocols.BombBio_OpenCell_V1,
     RNA_amplification: RNA_amplification_protocols.OpenCell_V1,
   }),
