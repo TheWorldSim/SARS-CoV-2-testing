@@ -35,8 +35,8 @@ export function Intro (props: { change_route: ChangeRoute })
           <li>which companies, government facilities or NGOs might provide these resources</li>
         </ul>
       </p>
+      <h3>Standards</h3>
       <p>
-        <h4>Standards</h4>
         After a conversation with Daniel Goodwin and Joi Ito, it's clear that interoperability is key for large scale testing.  For example we have standards for:
         <ul>
           <li><a href="https://slas.org/SLAS/assets/File/ANSI_SLAS_4-2004_WellPositions.pdf">96 well plates from ANSI/SBS/SLAS</a></li>
