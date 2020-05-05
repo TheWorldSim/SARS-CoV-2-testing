@@ -1,8 +1,6 @@
 import { Component, h } from "preact"
-import { Dashboard } from "./components/dashboard/Dashboard"
-import { Intro } from "./components/intro/Intro"
 import { Header } from "./components/header/Header"
-import { Route } from "./Routes"
+import { Route, router, match_route_hash } from "./Routes"
 
 
 export interface AppProps {
@@ -20,15 +18,13 @@ export class App extends Component<AppProps, AppState> {
 
   constructor(props: AppProps) {
     super(props)
-    this.state.location = location.hash === "#dashboard" ? Route.dashboard : Route.home
+    this.state.location = match_route_hash(location.hash).route
   }
 
   render(props: AppProps, state: AppState) {
 
     const change_route = (new_route: Route) => this.setState({ location: new_route })
-    const is_dashboard = (state.location === Route.dashboard)
-
-    let content = is_dashboard ? <Dashboard /> : <Intro change_route={change_route} />
+    const content = router(state.location, change_route)
 
     return <div>
       <Header

@@ -1,5 +1,6 @@
 import { h } from "preact"
 import { Link, Route, ChangeRoute, LinkUnstyled } from "../../Routes"
+import { RequiredStandards } from "../standards/RequiredStandards"
 
 
 export function Intro (props: { change_route: ChangeRoute })
@@ -43,13 +44,7 @@ export function Intro (props: { change_route: ChangeRoute })
           <li><a href="https://www.google.com/search?q=iso+8655&oq=iso+8655">pipette accuracy etc</a></li>
         </ul>
         But we don't have standards for:
-        <ul>
-          <li><a href="https://medium.com/@danielrgoodwin/architecting-the-biocensus-9da1d3399359">sample collection tubes</a></li>
-          <li>transport media (chemical buffer / solutions)</li>
-          <li>lysis media (chemical buffer / solutions)</li>
-          <li>pipette tips; dimensions, wetability, filtration standards, recycling etc</li>
-          <li>inter region data exchange</li>
-        </ul>
+        <RequiredStandards />
         This is a call to action and <a href="https://github.com/coronaopensource">a place to organise and agree upon those standards</a>.
       </p>
       <br />
