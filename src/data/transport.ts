@@ -3,12 +3,15 @@ import { add_name } from "../util/add_name"
 
 const _transports = {
   courier: PT({
+    display_name: "Courier",
     other_names: [],
   }),
   postal: PT({
+    display_name: "Postal",
     other_names: [],
   }),
   clinic_technician: PT({
+    display_name: "Clinic technician",
     other_names: [],
   }),
 }

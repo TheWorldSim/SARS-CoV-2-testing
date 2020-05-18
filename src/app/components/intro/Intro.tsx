@@ -12,18 +12,22 @@ export function Intro (props: { change_route: ChangeRoute })
         <Link route={Route.dashboard} current_route={Route.home} change_route={props.change_route}>Go to dashboard</Link>
       </p>
       <p>
-        The future needs large scale testing.  This will need rapid, coordinated mass manufacturing.
-      </p>
-      <p>
-        We've had to harness and coordinate the industrial might of the world many times before.  In 1941 it was the open sharing of information to standardise industry including the <a href="https://www.westyorkssteel.com/blog/bs970-an-act-of-perseverance/">"EN" grades of steel</a>.  Remmeber "EN" stood for Emergency Number!
-      </p>
-      <p>
-        And the world did it again during the development of the internet.  Private industry collaborating around open designs, information and a common set of interoperable standards.
+        Population scale testing is required.
         <ul>
           <li>The goal is to get more, and accurate testing globally.</li>
           <li>The scale and extended time periods required means this also needs to be affordable.</li>
+          <li>The potential for huge amounts of plastic waste means we might also benefit from thinking differently about the problem.</li>
         </ul>
+      </p>
+      <p>
+        We've harnessed and coordinate mass industrial manufacturing before.  The world did it again during the development of the internet.  And again to sequence the human genome.  Each time the same pattern has been repeated: open sharing of information to standardise private industry.  Collaborating around open designs, information and a common set of interoperable standards.
+      </p>
+      <p>
         Even though this project is called CoronaOpenSource, the project still welcomes existing and new closed source implmentations for testing that are effective in increasing the global rate of affordable testing.
+      </p>
+      <h3>Government oversight</h3>
+      <p>
+        The US FDA EUA has allowed many new tests to reach the market in record time.  The <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/policy-coronavirus-disease-2019-tests-during-public-health-emergency-revised">policy was tightened</a> to require companies to submit validation data much earlier as a bad test is worse than no test.
       </p>
       <h3>The dashboard</h3>
       <p>

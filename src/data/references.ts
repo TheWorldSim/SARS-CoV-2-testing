@@ -73,6 +73,14 @@ const _REFS = {
     authors: [AUTHORS.GOV_UK],
     published_date: null,
   }),
+  Melford_GITC: PR({
+    doi: null,
+    url: "https://www.melford.co.uk/products/biochemicals/biochemical-reagents/guanidine-thiocyanate-1-kg.html",
+    title: "Guanidine Thiocyanate, 1 Kilogram",
+    other_urls: [],
+    authors: [],
+    published_date: null,
+  }),
   Oberacker_etal_2019_BOMB: PR({
     doi: "10.1371/journal.pbio.3000107",
     url: "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000107",

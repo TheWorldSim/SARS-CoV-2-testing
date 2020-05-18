@@ -2,6 +2,29 @@ import { Reference, REFS } from "./references"
 import { calculate_display_name } from "../util/add_name"
 
 
+// TODO add:
+//  SARS-CoV -2 RNA was detected only in 32% of OP swabs, which was significantly lower than that in nasal swabs (63%) (16)
+//  https://jcm.asm.org/content/jcm/early/2020/04/03/JCM.00512-20.full.pdf
+/**
+ * Swabbing technique (standard)
+ *
+ * In order to properly obtain an NP swab specimen, the swab must be inserted deeply into the
+71 nasal cavity and should elicit “tears”. Patients will likely flinch, but that means the swab has hit
+72 the target. The OP swab should elicit a gag reflex, but there is much person to person variability
+73 in the gag response. Swabs should be kept in place for 10 seconds while twirling the swab three
+74 times. Swabs should have flocked non-toxic synthetic fibers such as polyester as well as
+75 synthetic nylon handles (17).
+ * https://jcm.asm.org/content/jcm/early/2020/04/03/JCM.00512-20.full.pdf
+ *
+ *
+ * demonstrated high viral RNA of SARS-CoV-2
+116 in fecal material (24, 25) as well as delayed shedding from the respiratory tract (4, 18) late in
+117 their clinical course
+ * https://jcm.asm.org/content/jcm/early/2020/04/03/JCM.00512-20.full.pdf
+ *
+ *
+ */
+
 const _sample_strategies = {
   Public_Health_Wales: PSS({
     locations: ["Oropharyngeal (throat)", "Mid turbinate (nose)"],
@@ -10,7 +33,7 @@ const _sample_strategies = {
     references: [],
   }),
   Public_Health_England_2020_04_23: PSS({
-    locations: ["Oropharyngeal (throat)", "Vestibule (nose)"],
+    locations: ["Oropharyngeal (throat)", "Nares (nose)"],
     time_needed_minutes: 5, // guess
     clinician_needed: false,
     references: [REFS.Public_Health_England_sampling_2020_04_23],
@@ -26,7 +49,8 @@ type SampleLocation =
   | "Saliva"
   | "Nasopharyngeal"
   | "Mid turbinate (nose)"
-  | "Vestibule (nose)" // add lower respiratory tract
+  | "Nares (nose)"
+  // add lower respiratory tract
 
 const is_throat = (sl: SampleLocation) => sl === "Oropharyngeal (throat)"
 const is_nasophar = (sl: SampleLocation) => sl === "Nasopharyngeal"

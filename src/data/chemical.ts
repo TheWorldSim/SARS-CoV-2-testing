@@ -31,6 +31,16 @@ const _chemicals = {
       REFS.SigmaAldrich_Bromophenol_blue
     ],
   }),
+  DTT: PC({
+    other_names: [
+      "Dithiothreitol"
+    ],
+    molecular_mass__gram_per_mol: 154.253,
+    cost_GBP: null,
+    cost_per: "gram",
+    cost_refs: [
+    ],
+  }),
   EDTA: PC({
     other_names: [
       "Ethylenediaminetetraacetic acid"
@@ -52,9 +62,11 @@ const _chemicals = {
   GITC: PC({
     other_names: ["Guanidine Isothiocyanate"],
     molecular_mass__gram_per_mol: 118.16,
-    cost_GBP: 2.13,  // 377 £ / (0.25 litres * 6 M * (118.16 g / mol) )
+    cost_GBP: 0.174,  // 174.75 £ / 1000
+    // cost_GBP: 2.13,  // 377 £ / (0.25 litres * 6 M * (118.16 g / mol) )
     cost_per: "gram",
     cost_refs: [
+      REFS.Melford_GITC,
       REFS.SigmaAldrich_GITC,
     ],
   }),
