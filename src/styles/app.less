@@ -1,7 +1,9 @@
 @import (inline) "normalize.css";
+@import "common.less";
+@import "test_validation_data_tool.less";
 
-h2 {
-	color: #2a7ea4;
+h2, h3 {
+	color: @dark_blue;
 }
 
 .component_container {
@@ -18,7 +20,7 @@ h2 {
 .route {
 	text-decoration: none;
 	border-radius: 3px;
-	background-color: rgb(27, 147, 206);
+	background-color: @light_blue;
 	color: white;
 	padding: 2px 5px;
 }
@@ -26,6 +28,6 @@ h2 {
 	color: white;
 }
 .route:hover, .route.active {
-	background-color: rgb(255, 165, 0);
-	text-shadow: rgb(209, 0, 0) 0px 0px 10px;
+	background-color: @orange;
+	text-shadow: @red 0px 0px 10px;
 }

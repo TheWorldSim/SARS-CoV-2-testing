@@ -3,6 +3,7 @@ import { Dashboard } from "./components/dashboard/Dashboard"
 import { Intro } from "./components/intro/Intro"
 import { Standards } from "./components/standards/Standards"
 import { NotFound } from "./NotFound"
+import { TestValidationDataTool } from "./components/test_validation_data_tool/TestValidationDataTool"
 
 
 export enum Route {
@@ -10,6 +11,7 @@ export enum Route {
   dashboard = "dashboard",
   standards = "standards",
   not_found = "not_found",
+  test_validation_data_tool = "test_validation_data_tool"
 }
 
 export interface RouteConfig
@@ -45,6 +47,11 @@ const route_map_by_path: {[index: string]: RouteConfig } = {
     path: "",
     handler: (change_route: ChangeRoute) => { return <Standards /> },
   },
+  "/prototype-test_validation_data_tool": {
+    route: Route.test_validation_data_tool,
+    path: "",
+    handler: (change_route: ChangeRoute) => { return <TestValidationDataTool change_route={change_route} /> },
+  },
   "/404": not_found,
 }
 // Set the correct paths
@@ -61,7 +68,8 @@ function match_route (route: Route): RouteConfig
 
 export function match_route_location (location: Location): RouteConfig
 {
-  const path = location.pathname.replace(/\/$/, "")
+  let path = location.pathname.split("/")[1]
+  path = path ? "/" + path : ""
   const config = route_map_by_path[path]
   return config || not_found
 }
