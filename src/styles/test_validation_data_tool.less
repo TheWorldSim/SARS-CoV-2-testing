@@ -8,7 +8,7 @@
   margin: 5px;
   cursor: pointer;
 }
-.option:hover {
+.option:hover, .option.selected {
   border: thin solid @light_blue;
   color: @dark_blue;
 }
@@ -18,11 +18,24 @@
 
 .option .title {
   margin: 0px;
+  margin-bottom: 5px;
   text-align: center;
 }
 
+@subtitle_grey: #777;
 .option .subtitle {
   margin: 0px;
   margin-top: 2px;
   text-align: center;
+  color: @subtitle_grey;
+}
+
+.section
+{
+  width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.section .subtitle {
+  color: @subtitle_grey;
 }
