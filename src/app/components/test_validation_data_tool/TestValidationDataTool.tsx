@@ -1,46 +1,34 @@
-import { h } from "preact"
+import { h, Component } from "preact"
 import { ChangeRoute } from "../../Routes"
+import { ExperimentType, ExperimentTypeOptions } from "./experiment_type"
 
 
-function Option (props: { title: string, subtitle: string })
-{
-  return <div className="option">
-    <h4 className="title">{props.title}</h4>
-    <p className="subtitle">{props.subtitle}</p>
-  </div>
+interface DataToolProps {
+  change_route: ChangeRoute
+}
+type DataToolState = {
+  experiment_type: ExperimentType
 }
 
-function Section (props: {title: string, content: h.JSX.Element } )
+export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
-  return <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-    <div style={{ textAlign: "center" }}>
-      <h3>{props.title}</h3>
+  state = {
+    experiment_type: null
+  }
+
+  handle_on_click_experiment (type: ExperimentType)
+  {
+    this.setState({
+      experiment_type: type,
+    })
+  }
+
+  render ()
+  {
+    return <div>
+      <ExperimentTypeOptions on_click_experiment={(type: ExperimentType) => this.handle_on_click_experiment(type)} />
+      <hr />
+      {this.state.experiment_type}
     </div>
-    <div>
-      {props.content}
-    </div>
-  </div>
-}
-
-
-function Experiment ()
-{
-  const content = <div>
-    <Option title="LOD" subtitle="Limit of Detection" />
-    <Option title="Clinical Evaluation Approximation" subtitle="Validation with synthetic patient samples" />
-    <Option title="Clinical Evaluation" subtitle="Validation with patient samples" />
-  </div>
-
-  return <Section title="Experiment Type" content={content} />
-}
-
-
-
-export function TestValidationDataTool (props: { change_route: ChangeRoute })
-{
-  return <div>
-    <Experiment />
-    <hr />
-    <Experiment />
-  </div>
+  }
 }
