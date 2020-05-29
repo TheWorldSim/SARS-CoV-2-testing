@@ -2,55 +2,68 @@ import { h, ComponentChildren } from "preact"
 import { Dashboard } from "./components/dashboard/Dashboard"
 import { Intro } from "./components/intro/Intro"
 import { Standards } from "./components/standards/Standards"
+import { NotFound } from "./NotFound"
 
 
-export enum Route
-{
+export enum Route {
   home = "home",
   dashboard = "dashboard",
   standards = "standards",
+  not_found = "not_found",
 }
 
-
-// RouterConfig
-
-export type ChangeRoute = (route: Route) => void
-
-interface RouteConfig
+export interface RouteConfig
 {
   route: Route,
-  hash: string,
+  path: string,
   handler: (change_route: ChangeRoute) => h.JSX.Element,
 }
 
-const home_config: RouteConfig = {
-  route: Route.home,
-  hash: "",
-  handler: (change_route: ChangeRoute) => { return <Intro change_route={change_route} /> },
+export type ChangeRoute = (route_config: RouteConfig) => void
+
+// RouterConfig
+
+const not_found: RouteConfig = {
+  route: Route.not_found,
+  path: "",
+  handler: (change_route: ChangeRoute) => { return <NotFound /> },
 }
 
-const route_map: RouteConfig[] = [
-  home_config,
-  {
+const route_map_by_path: {[index: string]: RouteConfig } = {
+  "": {
+    route: Route.home,
+    path: "",
+    handler: (change_route: ChangeRoute) => { return <Intro change_route={change_route} /> },
+  },
+  "/dashboard": {
     route: Route.dashboard,
-    hash: "#dashboard",
+    path: "",
     handler: (change_route: ChangeRoute) => { return <Dashboard /> },
   },
-  {
+  "/standards": {
     route: Route.standards,
-    hash: "#standards",
+    path: "",
     handler: (change_route: ChangeRoute) => { return <Standards /> },
   },
-]
+  "/404": not_found,
+}
+// Set the correct paths
+Object.keys(route_map_by_path).forEach(path => route_map_by_path[path].path = path)
+
+
+// match route or document.location
+
 function match_route (route: Route): RouteConfig
 {
-  const config = route_map.find(c => c.route === route)
-  return config || home_config
+  const config = Object.values(route_map_by_path).find(c => c.route === route)
+  return config || not_found
 }
-export function match_route_hash (hash: string): RouteConfig
+
+export function match_route_location (location: Location): RouteConfig
 {
-  const config = route_map.find(c => c.hash === hash)
-  return config || home_config
+  const path = location.pathname.replace(/\/$/, "")
+  const config = route_map_by_path[path]
+  return config || not_found
 }
 
 
@@ -73,7 +86,8 @@ interface PropsLinkUnstyled
 }
 export function LinkUnstyled (props: PropsLinkUnstyled)
 {
-  return link(props)
+  const { href, onClick } =  link(props)
+  return <a href={href} onClick={onClick}>{props.children}</a>
 }
 
 
@@ -83,14 +97,18 @@ interface PropsLink extends PropsLinkUnstyled
 }
 export function Link (props: PropsLink)
 {
-  return link(props)
+  const className = props.route === props.current_route ? "route active" : "route"
+  const { href, onClick } =  link(props)
+  return <a href={href} onClick={onClick} className={className}>{props.children}</a>
 }
 
-function link (args: { route: Route, change_route: ChangeRoute, children: ComponentChildren, current_route?: Route })
+function link (args: { route: Route, change_route: ChangeRoute })
 {
-  const href = match_route(args.route).hash
-  const onClick = () => args.change_route(args.route)
-  const className = args.current_route === undefined ? "" : (args.route === args.current_route ? "route active" : "route")
-
-  return <a href={href} onClick={onClick} className={className}>{args.children}</a>
+  const route_config = match_route(args.route)
+  const onClick = (event: Event) => {
+    event.stopPropagation()
+    event.preventDefault()
+    args.change_route(route_config)
+  }
+  return { href: route_config.path, onClick }
 }

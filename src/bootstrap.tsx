@@ -3,4 +3,9 @@ import { App } from './app/app';
 
 import './styles/app.less';
 
-render(<App title='Preact boilerplate' />, document.getElementById('app'));
+const rootElement = document.getElementById("app");
+if (rootElement.hasChildNodes()) {
+  render(<App />, rootElement, rootElement.firstElementChild);
+} else {
+  render(<App />, rootElement);
+}
