@@ -78,6 +78,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
       <h2 style={{ textAlign: "center" }}>SARS-2 Molecular Diagnostic Test Characterisation</h2>
       <br /><br /><br />
       { content }
+      <br /><br /><br />
     </div>
   }
 }

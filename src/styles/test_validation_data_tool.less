@@ -1,9 +1,20 @@
 @import "common.less";
 
+@g_margin: 0.1;
+@g_col1: 0.4;
+@g_col2: 1;
+@g_col3: 0.4;
+@g_col4: 1;
+@g_margin_fr: "@{g_margin}fr";
+@g_col1_fr: "@{g_col1}fr";
+@g_col2_fr: "@{g_col2}fr";
+@g_col3_fr: "@{g_col3}fr";
+@g_col4_fr: "@{g_col4}fr";
+
 .test_table_row
 {
   display: grid;
-  grid-template-columns: 0.1fr 0.3fr 1fr 0.3fr 1fr 0.1fr;
+  grid-template-columns: e("@{g_margin_fr} @{g_col1_fr} @{g_col2_fr} @{g_col3_fr} @{g_col4_fr} @{g_margin_fr}");
   border-top: thin solid white;
   border-bottom: thin solid white;
 }
@@ -13,8 +24,13 @@
 }
 .test_table_row.selectable:hover
 {
-  border-top: thin solid @orange;
-  border-bottom: thin solid @orange;
+  border-top: thin solid @hover;
+  border-bottom: thin solid @hover;
+}
+.test_table_row.selected
+{
+  border-top: thin solid @selected;
+  border-bottom: thin solid @selected;
 }
 .test_table_row .cell
 {
@@ -30,11 +46,11 @@
   cursor: pointer;
 }
 .option.selected {
-  border: thin solid @orange;
+  border: thin solid @selected;
   color: @dark_blue;
 }
 .option:hover {
-  border: thin solid @light_blue;
+  border: thin solid @hover;
   color: @dark_blue;
 }
 .option:active {
