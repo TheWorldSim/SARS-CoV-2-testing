@@ -1,5 +1,26 @@
 @import "common.less";
 
+.test_table_row
+{
+  display: grid;
+  grid-template-columns: 0.1fr 0.3fr 1fr 0.3fr 1fr 0.1fr;
+  border-top: thin solid white;
+  border-bottom: thin solid white;
+}
+.test_table_row.selectable
+{
+  cursor: pointer;
+}
+.test_table_row.selectable:hover
+{
+  border-top: thin solid @orange;
+  border-bottom: thin solid @orange;
+}
+.test_table_row .cell
+{
+  border-top: thin solid #EEE;
+  padding: 2px;
+}
 
 .option {
   padding: 20px;

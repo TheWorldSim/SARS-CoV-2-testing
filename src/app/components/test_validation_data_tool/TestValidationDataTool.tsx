@@ -1,9 +1,10 @@
 import { h, Component } from "preact"
 import { ChangeRoute } from "../../Routes"
-import { ExperimentType, ExperimentTypeOptions } from "./experiment_type"
+import { ExperimentType, ExperimentTypeOptions } from "./ExperimentTypeOptions"
 import { MethodsSection } from "./MethodsSection"
 import { TestData, get_test_data } from "./test_data"
 import { PleaseWaitLoadingData } from "./PleaseWaitLoadingData"
+import { SelectApplicationMode, ApplicationModeType } from "./SelectApplicationMode"
 import { SelectTest } from "./SelectTest"
 
 
@@ -11,6 +12,7 @@ interface DataToolProps {
   change_route: ChangeRoute
 }
 interface DataToolState {
+  application_mode: ApplicationModeType
   test_data: TestData[]
   test_name: string
   test_manufacturer: string
@@ -20,6 +22,7 @@ interface DataToolState {
 export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
   state = {
+    application_mode: null,
     test_data: null,
     test_name: null,
     test_manufacturer: null,
@@ -37,6 +40,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
   render ()
   {
     const {
+      application_mode,
       test_data,
       test_name,
       test_manufacturer,
@@ -48,7 +52,15 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     if (!test_data) content = [<PleaseWaitLoadingData />]
     else
     {
-      content = [<SelectTest test_data={test_data} />]
+      // content.push(<SelectApplicationMode
+      //   selected_application_mode={application_mode}
+      //   on_click_mode={(application_mode: ApplicationModeType) => this.setState({ application_mode })}
+      // />)
+
+      /*if (application_mode)*/ content.push(<SelectTest
+        test_data={test_data}
+        test_selected={(args: { test_name: string, test_manufacturer: string }) => this.setState(args) }
+      />)
 
       if (test_name && test_manufacturer) content.push(<ExperimentTypeOptions
         selected_experiment={experiment_type}

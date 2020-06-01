@@ -1,5 +1,5 @@
 import { h } from "preact"
-import { ExperimentType } from "./experiment_type"
+import { ExperimentType } from "./ExperimentTypeOptions"
 import { Section, website_source_feedback_url, website_source_url } from "./common"
 
 

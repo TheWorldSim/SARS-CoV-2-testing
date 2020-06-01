@@ -1,5 +1,4 @@
 import { h } from "preact"
-import { ExperimentType } from "./experiment_type"
 
 
 export function Option (props: { is_selected: boolean, title: string, subtitle: string, on_click: () => void })
