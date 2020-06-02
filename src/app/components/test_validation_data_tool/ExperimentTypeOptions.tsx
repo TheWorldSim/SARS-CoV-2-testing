@@ -1,5 +1,5 @@
 import { h } from "preact"
-import { Option, Section } from "./common"
+import { FormOption, Section } from "./common"
 
 
 export enum ExperimentType
@@ -53,7 +53,7 @@ function ExperimentOption (props:  { experiment: Experiment, selected_experiment
 {
   const { selected_experiment, experiment, on_click_experiment } = props
 
-  return <Option
+  return <FormOption
     is_selected={selected_experiment === experiment.type}
     title={experiment.title}
     subtitle={experiment.subtitle}

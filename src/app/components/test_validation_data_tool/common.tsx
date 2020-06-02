@@ -1,7 +1,7 @@
 import { h } from "preact"
 
 
-export function Option (props: { is_selected: boolean, title: string, subtitle: string, on_click: () => void })
+export function FormOption (props: { is_selected: boolean, title: string, subtitle: string, on_click: () => void })
 {
   const selected = props.is_selected ? "selected" : ""
 

@@ -5,6 +5,7 @@ import { MethodsSection } from "./MethodsSection"
 import { TestData, get_test_data } from "./test_data"
 import { PleaseWaitLoadingData } from "./PleaseWaitLoadingData"
 import { SelectApplicationMode, ApplicationModeType } from "./SelectApplicationMode"
+import { InputSourceMaterialURL } from "./InputSourceMaterialURL"
 import { SelectTest } from "./SelectTest"
 
 
@@ -13,16 +14,23 @@ interface DataToolProps {
 }
 interface DataToolState {
   application_mode: ApplicationModeType
+  source_material_url: string
   test_data: TestData[]
   test_name: string
   test_manufacturer: string
   experiment_type: ExperimentType
 }
 
+function get_components ()
+{
+
+}
+
 export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
   state = {
     application_mode: null,
+    source_material_url: null,
     test_data: null,
     test_name: null,
     test_manufacturer: null,
@@ -37,48 +45,64 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     })
   }
 
-  render ()
+  get_content ()
   {
     const {
       application_mode,
+      source_material_url,
       test_data,
       test_name,
       test_manufacturer,
       experiment_type
     } = this.state
 
-    let content: h.JSX.Element[] = []
+    let content = [<PleaseWaitLoadingData />]
 
-    if (!test_data) content = [<PleaseWaitLoadingData />]
-    else
-    {
-      // content.push(<SelectApplicationMode
-      //   selected_application_mode={application_mode}
-      //   on_click_mode={(application_mode: ApplicationModeType) => this.setState({ application_mode })}
-      // />)
+    if (!test_data) return content
 
-      /*if (application_mode)*/ content.push(<SelectTest
-        test_data={test_data}
-        test_selected={(args: { test_name: string, test_manufacturer: string }) => this.setState(args) }
-      />)
+    content = []
 
-      if (test_name && test_manufacturer) content.push(<ExperimentTypeOptions
-        selected_experiment={experiment_type}
-        on_click_experiment={(experiment_type: ExperimentType) => this.setState({ experiment_type })}
-      />)
+    content.push(<SelectApplicationMode
+      selected_application_mode={application_mode}
+      on_click_mode={(application_mode: ApplicationModeType) => this.setState({ application_mode })}
+    />)
 
-      if (experiment_type)
-      {
-        content.push(<hr />)
-        content.push(<MethodsSection test_name={test_name} experiment_type={experiment_type} />)
-      }
-    }
+    if (!application_mode) return content
+
+    content.push(<InputSourceMaterialURL
+      selected_source_material_url={source_material_url}
+      on_change_source_material_url={(source_material_url: string) => this.setState({ source_material_url })}
+    />)
+
+    if (!source_material_url) return content
+
+    content.push(<SelectTest
+      test_data={test_data}
+      test_selected={(args: { test_name: string, test_manufacturer: string }) => this.setState(args) }
+    />)
+
+    if (!test_name || !test_manufacturer) return content
+
+    content.push(<ExperimentTypeOptions
+      selected_experiment={experiment_type}
+      on_click_experiment={(experiment_type: ExperimentType) => this.setState({ experiment_type })}
+    />)
+
+    if (!experiment_type) return content
+
+    content.push(<hr />)
+    content.push(<MethodsSection test_name={test_name} experiment_type={experiment_type} />)
+
+    return content
+  }
+
+  render ()
+  {
+    const content = this.get_content()
 
     return <div>
       <h2 style={{ textAlign: "center" }}>SARS-2 Molecular Diagnostic Test Characterisation</h2>
-      <br /><br /><br />
       { content }
-      <br /><br /><br />
     </div>
   }
 }

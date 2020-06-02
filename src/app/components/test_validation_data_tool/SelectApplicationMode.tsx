@@ -1,5 +1,5 @@
 import { h } from "preact"
-import { Section, Option } from "./common"
+import { Section, FormOption } from "./common"
 
 
 export enum ApplicationModeType
@@ -41,7 +41,7 @@ function ApplicationModeOption (props:  { app_mode: ApplicationMode, selected_ap
 {
   const { app_mode, selected_application_mode, on_click_mode } = props
 
-  return <Option
+  return <FormOption
     is_selected={selected_application_mode === app_mode.type}
     title={app_mode.title}
     subtitle={app_mode.subtitle}
@@ -53,11 +53,11 @@ export function SelectApplicationMode (props: { selected_application_mode: Appli
 {
   const content = <div>
     <ApplicationModeOption app_mode={application_modes.published_third_party_research} {...props} />
-    <ApplicationModeOption app_mode={application_modes.preparing_third_party_research} {...props} />
+    {/* <ApplicationModeOption app_mode={application_modes.preparing_third_party_research} {...props} /> */}
     <ApplicationModeOption app_mode={application_modes.manufacturer_research_eua_ifu} {...props} />
   </div>
 
   const subtitle = props.selected_application_mode ? <p></p> : <p>Please select one</p>
 
-  return <Section title="Application mode" subtitle={subtitle} content={content} />
+  return <Section title="Select source material" subtitle={subtitle} content={content} />
 }

@@ -2,6 +2,7 @@ import { h, JSX } from "preact"
 import { useState } from "preact/hooks"
 import { TestData } from "./test_data"
 import { string_similarity } from "../../../util/string_similarity"
+import { Section, FormOption } from "./common"
 
 
 function on_input_factory (handler: (value: string) => void)
@@ -32,6 +33,33 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
 {
   const [ test_name_text, set_test_name_text ] = useState("")
   const [ test_manufacturer_text, set_test_manufacturer_text ] = useState("")
+  let [ test_is_selected, set_test_is_selected ] = useState(false)
+
+  const summary = <div>
+    {test_name_text && test_manufacturer_text && <FormOption
+      is_selected={test_is_selected}
+      title={test_is_selected ? "Selected:" : "Confirm:"}
+      subtitle={test_name_text + " from " + test_manufacturer_text}
+      on_click={() => {
+        test_is_selected = !test_is_selected
+        if (test_is_selected)
+        {
+          props.test_selected({ test_name: test_name_text, test_manufacturer: test_manufacturer_text })
+        }
+        else
+        {
+          // This is a bit of a hack to get form to simplify down to the test search & selection part again
+          // but for now it's ok.
+          props.test_selected({ test_name: null, test_manufacturer: null })
+        }
+        set_test_is_selected(test_is_selected)
+      }}
+    />}
+  </div>
+
+  const subtitle = <div>{!test_is_selected && "Search, select from list or enter new test then confirm →"}</div>
+
+  // Test search
 
   function handleFocus (event) { event.target.select() }
 
@@ -45,9 +73,8 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
 
   const { scored_test_data, max_score } = filter_test_data(props.test_data, test_name_text, test_manufacturer_text)
 
-  return <div>
+  const search_tests = <div className="section wide" style={{ gridTemplateColumns: "initial" }}>
     <div className="test_table_row">
-      <div></div>
       <div>Please enter the test name:&nbsp;</div>
       <input
         type="text"
@@ -62,20 +89,20 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
         onFocus={handleFocus}
         onInput={on_input_factory(set_test_manufacturer_text)}
       />
-      <div></div>
     </div>
 
     <p className="test_table_row">
       <div></div>
+      <div>
+        <p>
+          <b>If the test is not in the list please ...</b> contact ajp@centerofci.org
+        </p>
+        <p>
+          Please write "In house" for tests that do not have a name.
+        </p>
+      </div>
       <div></div>
-      <div><b>If the test is not in the list please ...</b> contact ajp@centerofci.org</div>
-      <div></div><div></div>
-    </p>
-    <p className="test_table_row">
-      <div></div>
-      <div></div>
-      <div>If the test was developed in house and you have not given it a name then write "In house" for the test name.</div>
-      <div></div><div></div>
+      <div>Hello</div>
     </p>
 
     {scored_test_data.map(data => {
@@ -87,13 +114,16 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
         style={{ color: `rgba(0,0,0,${alpha})` }}
         onClick={on_click_factory(data.test)}
       >
-        <div></div>
         <div>{/* data.score */}</div>
         <div className="cell">{data.test.test_name}</div>
         <div></div>
         <div className="cell">{data.test.test_manufacturer}</div>
-        <div></div>
       </div>
     })}
+  </div>
+
+  return <div>
+    <Section title="Test selection" subtitle={subtitle} content={summary} />
+    {!test_is_selected && search_tests}
   </div>
 }

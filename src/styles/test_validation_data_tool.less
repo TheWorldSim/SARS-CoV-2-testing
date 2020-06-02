@@ -1,11 +1,9 @@
 @import "common.less";
 
-@g_margin: 0.1;
 @g_col1: 0.4;
 @g_col2: 1;
 @g_col3: 0.4;
 @g_col4: 1;
-@g_margin_fr: "@{g_margin}fr";
 @g_col1_fr: "@{g_col1}fr";
 @g_col2_fr: "@{g_col2}fr";
 @g_col3_fr: "@{g_col3}fr";
@@ -14,7 +12,7 @@
 .test_table_row
 {
   display: grid;
-  grid-template-columns: e("@{g_margin_fr} @{g_col1_fr} @{g_col2_fr} @{g_col3_fr} @{g_col4_fr} @{g_margin_fr}");
+  grid-template-columns: e("@{g_col1_fr} @{g_col2_fr} @{g_col3_fr} @{g_col4_fr}");
   border-top: thin solid white;
   border-bottom: thin solid white;
 }
@@ -76,6 +74,11 @@
   width: 1000px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 60px auto;
+}
+.section.wide
+{
+  width: 1360px;
 }
 .section .subtitle {
   color: @subtitle_grey;
