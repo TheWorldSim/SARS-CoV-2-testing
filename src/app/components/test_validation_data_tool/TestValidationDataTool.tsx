@@ -6,20 +6,12 @@ import { TestData } from "./test_data"
 import { SelectApplicationMode, ApplicationModeType } from "./SelectApplicationMode"
 import { InputSourceMaterialURL } from "./InputSourceMaterialURL"
 import { SelectTest } from "./SelectTest"
+import { ResetForm } from "./ResetForm"
 
 
 interface DataToolProps {
   change_route: ChangeRoute
   test_data: TestData[]
-}
-interface DataToolState {
-  application_mode: ApplicationModeType
-  source_material_url: string
-  source_material_url_is_selected: boolean
-  test_name: string
-  test_manufacturer: string
-  test_is_selected: boolean
-  experiment_type: ExperimentType
 }
 
 function get_stored_state ()
@@ -30,19 +22,22 @@ function get_stored_state ()
 
 const VERSION = "2020-06-19 v2"
 const LOAD_DATE_TIME = new Date().getTime().toString()
+const state = {
+  version: VERSION,
+  application_mode: null as ApplicationModeType,
+  source_material_url: "",
+  source_material_url_is_selected: false,
+  test_name: "",
+  test_manufacturer: "",
+  test_is_selected: false,
+  experiment_type: null as ExperimentType,
+  sample_type: "",
+}
+type DataToolState = typeof state
 
 export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
-  state = {
-    version: VERSION,
-    application_mode: null,
-    source_material_url: "",
-    source_material_url_is_selected: false,
-    test_name: "",
-    test_manufacturer: "",
-    test_is_selected: false,
-    experiment_type: null,
-  }
+  state = state
 
   componentDidMount ()
   {
@@ -83,10 +78,18 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
       test_name,
       test_manufacturer,
       test_is_selected,
-      experiment_type
+      experiment_type,
+      sample_type,
     } = this.state
 
+    const test: TestData = { test_name, test_manufacturer }
+
     const content: h.JSX.Element[] = []
+
+    if (application_mode)
+    {
+      content.push(<ResetForm on_reset={() => this.setState(state)}/>)
+    }
 
     content.push(<SelectApplicationMode
       selected_application_mode={application_mode}
@@ -123,7 +126,12 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     if (!experiment_type) return content
 
     content.push(<hr />)
-    content.push(<MethodsSection test_name={test_name} experiment_type={experiment_type} />)
+    content.push(<MethodsSection
+      test={test}
+      experiment_type={experiment_type}
+      sample_type={sample_type}
+      on_change_sample_type={(sample_type: string) => this.setState({ sample_type })}
+    />)
 
     return content
   }

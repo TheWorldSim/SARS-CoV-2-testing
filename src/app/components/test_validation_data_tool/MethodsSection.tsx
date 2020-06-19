@@ -1,6 +1,7 @@
 import { h } from "preact"
 import { ExperimentType } from "./ExperimentTypeOptions"
 import { Section, website_source_feedback_url, website_source_url } from "./common"
+import { TestData } from "./test_data"
 
 
 // Guidance
@@ -54,11 +55,11 @@ function Guidance_comparison ()
 
 // CRISPSS (Clinically Relevant Invitro Synthetic Patient Sample Standard)
 
-function SelectSampleType (props: { positive: boolean })
+function SelectSampleType (props: { sample_type: string, on_change: (sample_type: string) => void })
 {
-  return <select>
+  return <select value={props.sample_type} onChange={e => props.on_change(e.currentTarget.value)}>
     <option value="RNA in water">RNA in water</option>
-    <option value="MS2">MS2</option>
+    <option value="VLPs-london-biofoundry-v1-2020-05">MS2-virus-like-SARS-CoV-2 particles, London Biofoundry v1-2020-05</option>
     <option value="PatientSamples">Patient Samples</option>
   </select>
 }
@@ -77,10 +78,14 @@ function Protocol (props: { version: string, content: h.JSX.Element })
 }
 
 
-function Protocol_LOD (props: { test_name: string /* crispss: CRISPSS_type */ })
+function Protocol_LOD (props: {
+  test: TestData,
+  sample_type: string, /* crispss: CRISPSS_type */
+  on_change_sample_type: (sample_type: string) => void
+})
 {
   const content = <div>
-    We used the <SelectSampleType positive={true} /> as a semi-quantitative copy number standard and as a processing control in the absence of patient samples to calculate the LOD (Limit Of Detection) for the { props.test_name } test.
+    Sample type <SelectSampleType sample_type={props.sample_type} on_change={props.on_change_sample_type} /> used for evaluating LOD (limit of detection) of { props.test.test_name } test from { props.test.test_manufacturer }.
   </div>
 
   return <Protocol version="1 -- 2020-05-29" content={content} />
@@ -125,14 +130,16 @@ function Protocol_comparison ()
 
 // Methods section and layout
 
-export function MethodsSection (props: { test_name: string, experiment_type: ExperimentType })
+export function MethodsSection (props: {
+  test: TestData,
+  experiment_type: ExperimentType,
+  sample_type: string,
+  on_change_sample_type: (sample_type: string) => void,
+})
 {
   const subtitle = <div>
     <p>
-      Contains the suggested protocol for conducting the experiment.  <a href={website_source_url}>This is a living document</a>, <a href={website_source_feedback_url}>all feedback is strongly encouraged</a>.
-    </p>
-    <p>
-      Feedback is incorporated if aligned with the goal of improving the availability of accurate, affordable SARS-CoV-2 testing.
+      Contains the suggested protocol for conducting the experiment.  <a href={website_source_url}>This is a living document</a>, <a href={website_source_feedback_url}>feedback is strongly encouraged</a>.
     </p>
   </div>
 
@@ -142,7 +149,11 @@ export function MethodsSection (props: { test_name: string, experiment_type: Exp
   if (props.experiment_type === ExperimentType.lod)
   {
     guidance_content = <Guidance_LOD />
-    protocol_content = <Protocol_LOD test_name={props.test_name} />
+    protocol_content = <Protocol_LOD
+      test={props.test}
+      sample_type={props.sample_type}
+      on_change_sample_type={props.on_change_sample_type}
+    />
   }
   else if (props.experiment_type === ExperimentType.inclusivity)
   {
