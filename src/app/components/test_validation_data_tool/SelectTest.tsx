@@ -1,5 +1,4 @@
 import { h, JSX } from "preact"
-import { useState } from "preact/hooks"
 import { TestData } from "./test_data"
 import { string_similarity } from "../../../util/string_similarity"
 import { Section, FormOption } from "./common"
@@ -29,11 +28,22 @@ function filter_test_data (test_data: TestData[], test_name_text: string, test_m
 }
 
 
-export function SelectTest (props: { test_data: TestData[], test_selected: (args: { test_name: string, test_manufacturer: string }) => void })
+interface Props
 {
-  const [ test_name_text, set_test_name_text ] = useState("")
-  const [ test_manufacturer_text, set_test_manufacturer_text ] = useState("")
-  let [ test_is_selected, set_test_is_selected ] = useState(false)
+  test_data: TestData[]
+  test_name: string
+  test_manufacturer: string
+  test_is_selected: boolean
+  change_test: (args: { test_name: string, test_manufacturer: string }) => void
+  change_test_is_selected: (test_selected: boolean) => void
+}
+
+
+export function SelectTest (props: Props)
+{
+  const test_name_text = props.test_name
+  const test_manufacturer_text = props.test_manufacturer
+  const test_is_selected = props.test_is_selected
 
   const summary = <div>
     {test_name_text && test_manufacturer_text && <FormOption
@@ -41,18 +51,7 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
       title={test_is_selected ? "Selected:" : "Confirm:"}
       subtitle={test_name_text + " from " + test_manufacturer_text}
       on_click={() => {
-        test_is_selected = !test_is_selected
-        if (test_is_selected)
-        {
-          props.test_selected({ test_name: test_name_text, test_manufacturer: test_manufacturer_text })
-        }
-        else
-        {
-          // This is a bit of a hack to get form to simplify down to the test search & selection part again
-          // but for now it's ok.
-          props.test_selected({ test_name: null, test_manufacturer: null })
-        }
-        set_test_is_selected(test_is_selected)
+        props.change_test_is_selected(!test_is_selected)
       }}
     />}
   </div>
@@ -65,10 +64,7 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
 
   function on_click_factory (test: TestData)
   {
-    return () => {
-      set_test_name_text(test.test_name)
-      set_test_manufacturer_text(test.test_manufacturer)
-    }
+    return () => props.change_test(test)
   }
 
   const { scored_test_data, max_score } = filter_test_data(props.test_data, test_name_text, test_manufacturer_text)
@@ -80,14 +76,20 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
         type="text"
         value={test_name_text}
         onFocus={handleFocus}
-        onInput={on_input_factory(set_test_name_text)}
+        onInput={on_input_factory((test_name: string) => props.change_test({
+          test_name,
+          test_manufacturer: test_manufacturer_text
+        }) )}
       />
       <div>&nbsp;from a manufacturer / lab:&nbsp;</div>
       <input
         type="text"
         value={test_manufacturer_text}
         onFocus={handleFocus}
-        onInput={on_input_factory(set_test_manufacturer_text)}
+        onInput={on_input_factory((test_manufacturer: string) => props.change_test({
+          test_name: test_name_text,
+          test_manufacturer
+        }) )}
       />
     </div>
 

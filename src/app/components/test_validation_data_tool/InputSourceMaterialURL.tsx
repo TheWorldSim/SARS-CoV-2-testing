@@ -1,12 +1,20 @@
 import { h } from "preact"
-import { useState } from "preact/hooks"
 import { Section, FormOption } from "./common"
 
 
-export function InputSourceMaterialURL (props: { selected_source_material_url: string, on_change_source_material_url: (source_material_url: string) => void })
+interface Props
 {
-  const [url, set_url] = useState(props.selected_source_material_url || "")
-  let [url_is_selected, set_url_is_selected] = useState(false)
+  source_material_url: string
+  source_material_url_is_selected: boolean
+  on_change_source_material_url: (source_material_url: string) => void
+  on_change_source_material_url_is_selected: (source_material_url_is_selected: boolean) => void
+}
+
+
+export function InputSourceMaterialURL (props: Props)
+{
+  const url = props.source_material_url
+  const url_is_selected = props.source_material_url_is_selected
 
   const content = url && <div>
     <FormOption
@@ -14,23 +22,14 @@ export function InputSourceMaterialURL (props: { selected_source_material_url: s
       title={url_is_selected ? "Selected:" : "Confirm:"}
       subtitle={url}
       on_click={() => {
-        url_is_selected = !url_is_selected
-        if (url_is_selected)
-        {
-          props.on_change_source_material_url(url)
-        }
-        else
-        {
-          props.on_change_source_material_url(null)
-        }
-        set_url_is_selected(url_is_selected)
+        props.on_change_source_material_url_is_selected(!url_is_selected)
       }}
     />
   </div>
 
-  const subtitle = props.selected_source_material_url ? <p></p> : <p>
+  const subtitle = url_is_selected ? <p></p> : <p>
     <div>Please input URL</div>
-    <input type="text" value={url} onInput={e => set_url(e.currentTarget.value)} />
+    <input type="text" value={url} onInput={e => props.on_change_source_material_url(e.currentTarget.value)} />
   </p>
 
   return <Section title="Select source material" subtitle={subtitle} content={content} />

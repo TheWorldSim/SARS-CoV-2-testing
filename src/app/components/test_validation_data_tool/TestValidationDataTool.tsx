@@ -15,8 +15,10 @@ interface DataToolProps {
 interface DataToolState {
   application_mode: ApplicationModeType
   source_material_url: string
+  source_material_url_is_selected: boolean
   test_name: string
   test_manufacturer: string
+  test_is_selected: boolean
   experiment_type: ExperimentType
 }
 
@@ -24,10 +26,13 @@ interface DataToolState {
 export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
   state = {
+    version: "2020-06-19 v2",
     application_mode: null,
-    source_material_url: null,
-    test_name: null,
-    test_manufacturer: null,
+    source_material_url: "",
+    source_material_url_is_selected: false,
+    test_name: "",
+    test_manufacturer: "",
+    test_is_selected: false,
     experiment_type: null,
   }
 
@@ -37,6 +42,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     if (data_tool_state)
     {
       const parsed_state = JSON.parse(data_tool_state)
+      if (parsed_state.version !== "2020-06-19 v2") return
       this.setState(parsed_state)
     }
   }
@@ -54,8 +60,10 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     const {
       application_mode,
       source_material_url,
+      source_material_url_is_selected,
       test_name,
       test_manufacturer,
+      test_is_selected,
       experiment_type
     } = this.state
 
@@ -69,18 +77,24 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     if (!application_mode) return content
 
     content.push(<InputSourceMaterialURL
-      selected_source_material_url={source_material_url}
+      source_material_url={source_material_url}
+      source_material_url_is_selected={source_material_url_is_selected}
       on_change_source_material_url={(source_material_url: string) => this.setState({ source_material_url })}
+      on_change_source_material_url_is_selected={(source_material_url_is_selected: boolean) => this.setState({ source_material_url_is_selected })}
     />)
 
-    if (!source_material_url) return content
+    if (!source_material_url_is_selected) return content
 
     content.push(<SelectTest
       test_data={this.props.test_data}
-      test_selected={(args: { test_name: string, test_manufacturer: string }) => this.setState(args) }
+      test_name={test_name}
+      test_manufacturer={test_manufacturer}
+      test_is_selected={test_is_selected}
+      change_test={(args: { test_name: string, test_manufacturer: string }) => this.setState(args)}
+      change_test_is_selected={(test_is_selected: boolean) => this.setState({ test_is_selected })}
     />)
 
-    if (!test_name || !test_manufacturer) return content
+    if (!test_is_selected) return content
 
     content.push(<ExperimentTypeOptions
       selected_experiment={experiment_type}
