@@ -170,7 +170,7 @@ export function MethodsSection (props: { test_name: string, experiment_type: Exp
     <select id="method-guidance-select">
       <option value="FDA">FDA</option>
     </select>&nbsp;
-    <a href="https://web.archive.org/web/20200512080155/https://www.fda.gov/media/135659/download">2020-05-11 (archived)</a>
+    <a href="https://web.archive.org/web/20200512080155/https://www.fda.gov/media/135659/download">2020-05-11</a>
     { guidance_content }
     <hr />
     <h4>Protocol</h4>

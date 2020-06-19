@@ -102,7 +102,7 @@ export function SelectTest (props: { test_data: TestData[], test_selected: (args
         </p>
       </div>
       <div></div>
-      <div>Hello</div>
+      <div></div>
     </p>
 
     {scored_test_data.map(data => {

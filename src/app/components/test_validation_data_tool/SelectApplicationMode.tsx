@@ -30,7 +30,7 @@ const application_modes = {
   }),
   [ApplicationModeType.manufacturer_research_eua_ifu]: as_application_mode({
     type: null,
-    title: "Manufacturer Research Eua Ifu",
+    title: "Manufacturer Research EUA or IFU",
     subtitle: "",
   }),
 }
@@ -57,7 +57,7 @@ export function SelectApplicationMode (props: { selected_application_mode: Appli
     <ApplicationModeOption app_mode={application_modes.manufacturer_research_eua_ifu} {...props} />
   </div>
 
-  const subtitle = props.selected_application_mode ? <p></p> : <p>Please select one</p>
+  const subtitle = props.selected_application_mode ? <p></p> : <p>Please select one.<br />Note: academic labs providing a design count as a manufacturer.</p>
 
   return <Section title="Select source material" subtitle={subtitle} content={content} />
 }
