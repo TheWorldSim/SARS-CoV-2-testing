@@ -22,11 +22,19 @@ interface DataToolState {
   experiment_type: ExperimentType
 }
 
+function get_stored_state ()
+{
+  const data_tool_state = localStorage.getItem("data_tool_state")
+  return data_tool_state ? JSON.parse(data_tool_state) : {}
+}
+
+const VERSION = "2020-06-19 v2"
+const LOAD_DATE_TIME = new Date().getTime().toString()
 
 export class TestValidationDataTool extends Component<DataToolProps, DataToolState>
 {
   state = {
-    version: "2020-06-19 v2",
+    version: VERSION,
     application_mode: null,
     source_material_url: "",
     source_material_url_is_selected: false,
@@ -38,21 +46,32 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
 
   componentDidMount ()
   {
-    const data_tool_state = localStorage.getItem("data_tool_state")
-    if (data_tool_state)
-    {
-      const parsed_state = JSON.parse(data_tool_state)
-      if (parsed_state.version !== "2020-06-19 v2") return
-      this.setState(parsed_state)
-    }
+    const stored_state = get_stored_state()
+    if (stored_state.version !== VERSION) return
+    localStorage.setItem("data_tool_state_date_time", LOAD_DATE_TIME)
+    this.setState(stored_state)
   }
 
   componentDidUpdate (prev_props: DataToolProps, prev_state: DataToolState)
   {
     if (prev_state !== this.state)
     {
-      localStorage.setItem("data_tool_state", JSON.stringify(this.state))
+      const stored_date_time = localStorage.getItem("data_tool_state_date_time")
+      if (!stored_date_time || stored_date_time === LOAD_DATE_TIME)
+      {
+        this.store_state()
+      }
+      else
+      {
+        // lose any changes
+        location.reload()
+      }
     }
+  }
+
+  store_state ()
+  {
+    localStorage.setItem("data_tool_state", JSON.stringify(this.state))
   }
 
   render ()
