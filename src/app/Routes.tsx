@@ -3,7 +3,7 @@ import { Dashboard } from "./components/dashboard/Dashboard"
 import { Intro } from "./components/intro/Intro"
 import { Standards } from "./components/standards/Standards"
 import { NotFound } from "./NotFound"
-import { TestValidationDataTool } from "./components/test_validation_data_tool/TestValidationDataTool"
+import { TestValidationDataToolParent } from "./components/test_validation_data_tool/TestValidationDataToolParent"
 
 
 export enum Route {
@@ -50,7 +50,7 @@ const route_map_by_path: {[index: string]: RouteConfig } = {
   "/prototype-test_validation_data_tool": {
     route: Route.test_validation_data_tool,
     path: "",
-    handler: (change_route: ChangeRoute) => { return <TestValidationDataTool change_route={change_route} /> },
+    handler: (change_route: ChangeRoute) => { return <TestValidationDataToolParent change_route={change_route} /> },
   },
   "/404": not_found,
 }

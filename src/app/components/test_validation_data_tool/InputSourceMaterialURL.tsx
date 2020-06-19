@@ -8,7 +8,7 @@ export function InputSourceMaterialURL (props: { selected_source_material_url: s
   const [url, set_url] = useState(props.selected_source_material_url || "")
   let [url_is_selected, set_url_is_selected] = useState(false)
 
-  const content = <div>
+  const content = url && <div>
     <FormOption
       is_selected={url_is_selected}
       title={url_is_selected ? "Selected:" : "Confirm:"}
