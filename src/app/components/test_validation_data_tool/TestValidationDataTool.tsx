@@ -7,6 +7,8 @@ import { SelectApplicationMode, ApplicationModeType } from "./SelectApplicationM
 import { InputSourceMaterialURL } from "./InputSourceMaterialURL"
 import { SelectTest } from "./SelectTest"
 import { ResetForm } from "./ResetForm"
+import { ResultsSection } from "./ResultsSection"
+import { website_source_feedback_url, website_source_url } from "./common"
 
 
 interface DataToolProps {
@@ -69,7 +71,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     localStorage.setItem("data_tool_state", JSON.stringify(this.state))
   }
 
-  render ()
+  get_content ()
   {
     const {
       application_mode,
@@ -132,6 +134,23 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
       sample_type={sample_type}
       on_change_sample_type={(sample_type: string) => this.setState({ sample_type })}
     />)
+
+    if (!sample_type) return content
+
+    content.push(<hr />)
+    content.push(<ResultsSection />)
+
+    return content
+  }
+
+  render ()
+  {
+    const content = this.get_content()
+
+    content.push(<hr style={{ marginTop: 150 }} />)
+    content.push(<div style={{ padding: 40 }}>
+      <a href={website_source_url}>This is a living document</a>, <a href={website_source_feedback_url}>feedback is strongly encouraged</a>
+    </div>)
 
     return content
   }

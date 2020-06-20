@@ -1,6 +1,6 @@
 import { h } from "preact"
 import { ExperimentType } from "./ExperimentTypeOptions"
-import { Section, website_source_feedback_url, website_source_url } from "./common"
+import { Section } from "./common"
 import { TestData } from "./test_data"
 
 
@@ -85,7 +85,7 @@ function Protocol_LOD (props: {
 })
 {
   const content = <div>
-    Sample type <SelectSampleType sample_type={props.sample_type} on_change={props.on_change_sample_type} /> used for evaluating LOD (limit of detection) of { props.test.test_name } test from { props.test.test_manufacturer }.
+    Sample type <SelectSampleType sample_type={props.sample_type} on_change={props.on_change_sample_type} /> from &lt;source&gt; used for evaluating LOD (limit of detection) of { props.test.test_name } test from { props.test.test_manufacturer }.
   </div>
 
   return <Protocol version="1 -- 2020-05-29" content={content} />
@@ -139,7 +139,10 @@ export function MethodsSection (props: {
 {
   const subtitle = <div>
     <p>
-      Contains the suggested protocol for conducting the experiment.  <a href={website_source_url}>This is a living document</a>, <a href={website_source_feedback_url}>feedback is strongly encouraged</a>.
+      Contains the suggested protocol for conducting the experiment.
+    </p>
+    <p>
+      Please select a sample type from the drop down list (below right).
     </p>
   </div>
 
@@ -176,7 +179,7 @@ export function MethodsSection (props: {
     protocol_content = <Protocol_comparison />
   }
 
-  const content = <div style={{ marginBottom: 150 }}>
+  const content = <div>
     <b>Guidance</b>&nbsp;
     <select id="method-guidance-select">
       <option value="FDA">FDA</option>
