@@ -55,19 +55,88 @@ export function ResultsSection (props: {
       onInput={e => props.on_change_results_text(e.currentTarget.value)}
     />
     {results_table}
-    <svg viewBox="0 0 100 100">
-      <AnimatedCircle index={1} isShowing={true}/>
-      <AnimatedCircle index={2} isShowing={true}/>
-      <Graph
-        x_domain={[0, 100]}
-        x_range={[15, 90]}
-        y_domain={[0, 100]}
-        y_range={[10, 90]}
-      />
-    </svg>
+    <Graph results={results} />
   </div>
 
   return <Section title="Results" subtitle={subtitle} content={content} />
+}
+
+function domain (values: number[], percent: number, invert: boolean = false, as_log: boolean = false): [number, number]
+{
+  const max = Math.max(...values)
+  const min = Math.min(...values)
+  const diff = Math.max(max - min, Number.EPSILON)
+  const margin = diff * (percent / 100)
+
+  let max_marg = max + margin
+  let min_marg = min - margin
+
+  if (as_log)
+  {
+    max_marg = Math.pow(10, Math.ceil(Math.log10(max)))
+    min_marg = Math.pow(10, Math.floor(Math.log10(min)))
+
+    if (Math.sign(min_marg) !== 0 && Math.sign(max_marg) && Math.sign(min_marg) !== Math.sign(max_marg))
+    {
+      if (Math.abs(min_marg - 0) < Math.abs(max_marg - 0))
+      {
+        min_marg = Number.EPSILON
+      }
+      else
+      {
+        max_marg = -Number.EPSILON
+      }
+    }
+  }
+
+  return invert ? [max_marg, min_marg] : [min_marg, max_marg]
+}
+
+const Graph = ({ results }: { results: [number, number][] }) =>
+{
+
+  const x_as_log = true
+  const x_axis: Axis = {
+    domain: domain(results.map(v => v[0]), 5, false, x_as_log),
+    range: [15, 90],
+    as_log: x_as_log,
+  }
+  const y_axis: Axis = {
+    domain: domain(results.map(v => v[1]), 5, true),
+    range: [10, 90],
+    as_log: false,
+  }
+
+  const { x_scale, y_scale } = useMemo(() => {
+
+    const x_scale = (x_axis.as_log ? d3.scaleLog() : d3.scaleLinear())
+      .domain(x_axis.domain)
+      .range(x_axis.range)
+
+    const y_scale = (y_axis.as_log ? d3.scaleLog() : d3.scaleLinear())
+      .domain(y_axis.domain)
+      .range(y_axis.range)
+
+    return { x_scale, y_scale }
+  }, [
+    x_axis.domain.join("-"),
+    x_axis.range.join("-"),
+    y_axis.domain.join("-"),
+    y_axis.range.join("-")
+  ])
+
+  return <svg viewBox="0 0 100 100">
+    {results.map(v => <circle
+      cx={x_scale(v[0])}
+      cy={y_scale(v[1])}
+      r="2"
+      fill="cornflowerblue"
+    />)}
+    <GraphAxes
+      x_axis={x_axis}
+      y_axis={y_axis}
+    />
+  </svg>
 }
 
 const AnimatedCircle = ({ index, isShowing }) => {
@@ -101,27 +170,29 @@ interface TickMarkLengths
   mid: number
 }
 
-// Adapted from: https://wattenberger.com/blog/react-and-d3
-const Graph = ({
-  x_domain,
-  x_range,
-  y_domain,
-  y_range,
-}) => {
+interface Axis
+{
+  domain: [number, number]
+  range: [number, number],
+  as_log: boolean
+}
 
-  const [left, right] = x_range
-  const [top, bottom] = y_range
+// Adapted from: https://wattenberger.com/blog/react-and-d3
+const GraphAxes = ({ x_axis, y_axis }: { x_axis: Axis, y_axis: Axis }) => {
+
+  const [left, right] = x_axis.range
+  const [top, bottom] = y_axis.range
 
   const ticks: { x_ticks: TickMark[], y_ticks: TickMark[] } = useMemo(() => {
 
-    const x_scale = d3.scaleLinear()
-      .domain(x_domain)
-      .range(x_range)
+    const x_scale = (x_axis.as_log ? d3.scaleLog() : d3.scaleLinear())
+      .domain(x_axis.domain)
+      .range(x_axis.range)
     const width = right - left
 
-    const y_scale = d3.scaleLinear()
-      .domain(y_domain)
-      .range(y_range)
+    const y_scale = (y_axis.as_log ? d3.scaleLog() : d3.scaleLinear())
+      .domain(y_axis.domain)
+      .range(y_axis.range)
     const height = bottom - top
 
     const pixels_per_tick = 20
@@ -136,10 +207,10 @@ const Graph = ({
         .map(value => ({ value, offset: y_scale(value) }))
     }
   }, [
-    x_domain.join("-"),
-    x_range.join("-"),
-    y_domain.join("-"),
-    y_range.join("-")
+    x_axis.domain.join("-"),
+    x_axis.range.join("-"),
+    y_axis.domain.join("-"),
+    y_axis.range.join("-")
   ])
 
   const tick_lengths: TickMarkLengths = {
@@ -152,13 +223,13 @@ const Graph = ({
       top={bottom}
       ticks={ticks.x_ticks}
       tick_lengths={tick_lengths}
-      range={x_range}
+      range={x_axis.range}
     />
     <YAxis
       left={left}
       ticks={ticks.y_ticks}
       tick_lengths={tick_lengths}
-      range={y_range}
+      range={y_axis.range}
     />
   </g>
 }

@@ -90,11 +90,6 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
 
     const content: h.JSX.Element[] = []
 
-    content.push(<ResultsSection
-      results_text={results_text}
-      on_change_results_text={(results_text: string) => this.setState({ results_text })}
-    />)
-
     if (application_mode)
     {
       content.push(<ResetForm on_reset={() => this.setState(state)}/>)
