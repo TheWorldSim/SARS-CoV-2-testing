@@ -34,6 +34,7 @@ const state = {
   test_is_selected: false,
   experiment_type: null as ExperimentType,
   sample_type: "",
+  results_text: "",
 }
 type DataToolState = typeof state
 
@@ -82,11 +83,17 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
       test_is_selected,
       experiment_type,
       sample_type,
+      results_text,
     } = this.state
 
     const test: TestData = { test_name, test_manufacturer }
 
     const content: h.JSX.Element[] = []
+
+    content.push(<ResultsSection
+      results_text={results_text}
+      on_change_results_text={(results_text: string) => this.setState({ results_text })}
+    />)
 
     if (application_mode)
     {
@@ -138,7 +145,10 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     if (!sample_type) return content
 
     content.push(<hr />)
-    content.push(<ResultsSection />)
+    content.push(<ResultsSection
+      results_text={results_text}
+      on_change_results_text={(results_text: string) => this.setState({ results_text })}
+    />)
 
     return content
   }
@@ -147,7 +157,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
   {
     const content = this.get_content()
 
-    content.push(<hr style={{ marginTop: 150 }} />)
+    content.push(<hr style={{ marginTop: 250 }} />)
     content.push(<div style={{ padding: 40 }}>
       <a href={website_source_url}>This is a living document</a>, <a href={website_source_feedback_url}>feedback is strongly encouraged</a>
     </div>)
