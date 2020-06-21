@@ -97,14 +97,22 @@ const Graph = ({ results }: { results: [number, number][] }) =>
 
   const x_as_log = true
   const x_axis: Axis = {
-    domain: domain(results.map(v => v[0]), 5, false, x_as_log),
+    domain: domain(results.map(v => v[0]), 10, false, x_as_log),
     range: [15, 90],
     as_log: x_as_log,
+    tick_lengths: {
+      end: 4,
+      mid: 3,
+    },
   }
   const y_axis: Axis = {
-    domain: domain(results.map(v => v[1]), 5, true),
+    domain: domain(results.map(v => v[1]), 15, true),
     range: [10, 90],
     as_log: false,
+    tick_lengths: {
+      end: 0,
+      mid: 3,
+    },
   }
 
   const { x_scale, y_scale } = useMemo(() => {
@@ -139,24 +147,6 @@ const Graph = ({ results }: { results: [number, number][] }) =>
   </svg>
 }
 
-const AnimatedCircle = ({ index, isShowing }) => {
-  const wasShowing = useRef(false)
-  useEffect(() => {
-    wasShowing.current = isShowing
-  }, [isShowing])
-
-  return (
-    <circle
-      cx={index * 15 + 10}
-      cy={10}
-      r="3"
-      fill={
-        wasShowing.current ? (isShowing ? "lightgrey" : "tomato") : "cornflowerblue"
-      }
-    />
-  )
-}
-
 
 interface TickMark
 {
@@ -173,8 +163,9 @@ interface TickMarkLengths
 interface Axis
 {
   domain: [number, number]
-  range: [number, number],
+  range: [number, number]
   as_log: boolean
+  tick_lengths: TickMarkLengths
 }
 
 // Adapted from: https://wattenberger.com/blog/react-and-d3
@@ -213,22 +204,17 @@ const GraphAxes = ({ x_axis, y_axis }: { x_axis: Axis, y_axis: Axis }) => {
     y_axis.range.join("-")
   ])
 
-  const tick_lengths: TickMarkLengths = {
-    end: 4,
-    mid: 3,
-  }
-
   return <g>
     <XAxis
       top={bottom}
       ticks={ticks.x_ticks}
-      tick_lengths={tick_lengths}
+      tick_lengths={x_axis.tick_lengths}
       range={x_axis.range}
     />
     <YAxis
       left={left}
       ticks={ticks.y_ticks}
-      tick_lengths={tick_lengths}
+      tick_lengths={y_axis.tick_lengths}
       range={y_axis.range}
     />
   </g>
@@ -289,7 +275,7 @@ const XAxis = ({
             style={{
               fontSize: "5px",
               textAnchor: "middle",
-              transform: `translateY(${top + 10}px)`
+              transform: `translateY(${top + Math.max(tick_lengths.end, tick_lengths.mid) + 5}px)`
             }}>
             { value }
           </text>
@@ -338,7 +324,7 @@ const YAxis = ({
               fontSize: "5px",
               textAnchor: "end",
               alignmentBaseline: "central",
-              transform: `translateX(${left - tick_lengths.end}px)`,
+              transform: `translateX(${left - Math.max(tick_lengths.end, tick_lengths.mid) - 1}px)`,
             }}>
             { value }
           </text>
