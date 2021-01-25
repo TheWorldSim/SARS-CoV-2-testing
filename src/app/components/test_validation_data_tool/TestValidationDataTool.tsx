@@ -35,6 +35,7 @@ const state = {
   experiment_type: null as ExperimentType,
   sample_type: "",
   results_text: "",
+  results_subref: "",
 }
 type DataToolState = typeof state
 
@@ -84,6 +85,7 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
       experiment_type,
       sample_type,
       results_text,
+      results_subref,
     } = this.state
 
     const test: TestData = { test_name, test_manufacturer }
@@ -143,6 +145,8 @@ export class TestValidationDataTool extends Component<DataToolProps, DataToolSta
     content.push(<ResultsSection
       results_text={results_text}
       on_change_results_text={(results_text: string) => this.setState({ results_text })}
+      results_subref={results_subref}
+      on_change_results_subref={(results_subref: string) => this.setState({ results_subref })}
     />)
 
     return content
